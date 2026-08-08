@@ -1,32 +1,20 @@
+import { asset } from "@/lib/asset";
+
 /**
- * The INK & GEARS mark: two stacked lines of heavy, angular, back-slanted
- * caps. Drawn as text inside an SVG so it scales, stays selectable-free, and
- * never needs a font file at runtime beyond the display face.
+ * The INK & GEARS mark.
+ *
+ * Lives in `public/logo.svg` so swapping in the master artwork is a one-file
+ * change — drop your own file over it (svg or png, adjust the extension here)
+ * and nothing else moves.
  */
 export function Wordmark({ className = "" }: { className?: string }) {
   return (
-    <svg
-      viewBox="0 0 118 34"
-      // Sized by CSS so the mark can shrink on a phone without the nav
-      // colliding with it.
-      className={`w-auto ${className}`}
-      role="img"
-      aria-label="INK &amp; GEARS"
-    >
-      <g
-        fill="currentColor"
-        fontFamily="var(--font-display-stack)"
-        fontWeight="800"
-        textAnchor="middle"
-        transform="skewX(-8)"
-      >
-        <text x="63" y="15" fontSize="17" letterSpacing="-0.5">
-          INK &amp;
-        </text>
-        <text x="61" y="31" fontSize="17" letterSpacing="-0.5">
-          GEARS
-        </text>
-      </g>
-    </svg>
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src={asset("/logo.svg")}
+      alt="INK &amp; GEARS"
+      className={`w-auto select-none ${className}`}
+      draggable={false}
+    />
   );
 }

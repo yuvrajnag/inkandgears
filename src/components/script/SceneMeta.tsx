@@ -115,7 +115,7 @@ export function SceneMeta({
         <div>
           <Label>In this scene</Label>
           {grouped.length === 0 ? (
-            <p className="rounded-[10px] border border-line2 bg-raise px-3 py-2.5 text-[11.5px] text-faint">
+            <p className="rounded-[10px] border border-line2 bg-raise px-3 py-2.5 text-[15px] text-faint">
               Nothing linked yet. Type <code className="font-mono">/c</code> or{" "}
               <code className="font-mono">/p</code> while writing and this fills
               itself in.
@@ -124,7 +124,7 @@ export function SceneMeta({
             <div className="space-y-2 rounded-[10px] border border-line2 bg-raise p-3">
               {grouped.map(([kind, list]) => (
                 <div key={kind}>
-                  <p className="mb-1 text-[10px] uppercase tracking-wider text-faint">
+                  <p className="mb-1 text-[13px] uppercase tracking-wider text-faint">
                     {kind}
                   </p>
                   <div className="flex flex-wrap gap-1.5">
@@ -145,7 +145,7 @@ export function SceneMeta({
           )}
         </div>
 
-        <p className="text-[11px] text-faint">
+        <p className="text-[14.3px] text-faint">
           {scene.words} words · last saved{" "}
           {new Date(scene.updatedAt).toLocaleString()}
         </p>

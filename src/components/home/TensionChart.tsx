@@ -22,7 +22,7 @@ export function TensionChart({
 
   if (points.length === 0) {
     return (
-      <div className="grid h-[190px] place-items-center rounded-xl border border-line bg-raise/50 text-[12px] text-faint">
+      <div className="grid h-[190px] place-items-center rounded-xl border border-line bg-raise/50 text-[15.6px] text-faint">
         Write a scene and the arc appears here.
       </div>
     );
@@ -118,7 +118,7 @@ export function TensionChart({
         )}
       </svg>
 
-      <div className="flex items-center justify-between border-t border-line px-3 py-1.5 text-[10.5px]">
+      <div className="flex items-center justify-between border-t border-line px-3 py-1.5 text-[13.7px]">
         {active ? (
           <>
             <Link

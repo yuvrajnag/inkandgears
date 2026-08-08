@@ -22,7 +22,7 @@ export function ProjectMenu({ onClose }: { onClose: () => void }) {
   }, [onClose]);
 
   const item =
-    "w-full rounded-md px-2.5 py-1.5 text-left text-[12.5px] text-ink/90 transition-colors hover:bg-raise2";
+    "w-full rounded-md px-2.5 py-1.5 text-left text-[16.2px] text-ink/90 transition-colors hover:bg-raise2";
 
   return (
     <div
@@ -30,7 +30,7 @@ export function ProjectMenu({ onClose }: { onClose: () => void }) {
       role="menu"
       className="absolute left-4 top-14 z-40 w-56 rounded-xl border border-line2 bg-panel p-1.5 shadow-2xl"
     >
-      <p className="px-2.5 pb-1 pt-1 text-[10.5px] uppercase tracking-wider text-faint">
+      <p className="px-2.5 pb-1 pt-1 text-[13.7px] uppercase tracking-wider text-faint">
         Project
       </p>
       <button

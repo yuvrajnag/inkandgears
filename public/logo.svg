@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1240 400" width="1240" height="400">
+  <!--
+    INK & GEARS wordmark.
+
+    Heavy geometric caps with 45-degree chamfers on the leading corners and
+    thin diagonal slices through the strokes. Each line is a group so the two
+    rows can be positioned independently.
+
+    Replace this file with the master artwork when it is to hand — the app
+    shell reads it as-is and nothing else needs to change.
+  -->
+  <g fill="#ffffff">
+    <!-- ================= INK & ================= -->
+    <g transform="translate(150 0)">
+      <!-- I -->
+      <path d="M0 0 H36 L64 28 V180 H28 L0 152 Z" />
+      <!-- N -->
+      <path d="M88 0 H140 L196 116 V0 H232 L260 28 V180 H208 L152 64 V180 H116 L88 152 Z" />
+      <!-- K -->
+      <path d="M284 0 H336 V56 L400 0 H442 L348 88 L444 180 H402 L336 124 V180 H284 Z" />
+      <!-- & : angular bowl over a larger bowl, with a flag tail -->
+      <path
+        fill-rule="evenodd"
+        d="M556 0 H628 L656 28 V74 L622 106 L660 150 L676 118 H716 L688 172 L698 180 H642 L630 170 L610 180 H540 L508 152 V104 L546 74 L522 50 V26 L550 0 Z
+           M558 38 V58 L580 78 L604 58 V38 Z
+           M552 116 V134 L570 148 H602 L616 138 L574 96 Z"
+      />
+      <!-- slice through the ampersand bowl -->
+      <path d="M600 -6 H624 L560 190 H536 Z" fill="#000000" />
+    </g>
+
+    <!-- ================= GEARS ================= -->
+    <g transform="translate(20 212)">
+      <!-- G -->
+      <path
+        fill-rule="evenodd"
+        d="M28 0 H206 L234 28 H84 V152 H178 V116 H132 V80 H234 V152 L206 180 H28 L0 152 V28 Z"
+      />
+      <!-- E -->
+      <path d="M262 0 H440 L468 28 H318 V70 H426 V106 H318 V152 H468 L440 180 H262 Z" />
+      <!-- A -->
+      <path
+        fill-rule="evenodd"
+        d="M566 0 H636 L734 180 H668 L652 148 H544 L528 180 H462 Z
+           M566 112 H630 L598 46 Z"
+      />
+      <!-- R -->
+      <path
+        fill-rule="evenodd"
+        d="M760 0 H916 L944 28 V90 L912 112 L944 180 H878 L850 116 H816 V180 H760 Z
+           M816 36 V82 H874 V36 Z"
+      />
+      <!-- S -->
+      <path d="M998 0 H1150 L1122 36 H1042 V70 H1122 L1150 98 V152 L1122 180 H970 L998 144 H1078 V106 H998 L970 78 V28 Z" />
+      <!-- trailing slice -->
+      <path d="M1168 0 H1200 L1150 106 H1118 Z" />
+    </g>
+  </g>
+</svg>

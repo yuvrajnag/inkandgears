@@ -30,9 +30,9 @@ export const Button = forwardRef<HTMLButtonElement, BtnProps>(function Button(
   const base =
     "inline-flex items-center justify-center gap-2 rounded-lg font-medium transition-all disabled:cursor-not-allowed disabled:opacity-40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50";
   const sizes = {
-    sm: "h-7 px-3 text-[12px]",
-    md: "h-9 px-4 text-[13px]",
-    lg: "h-11 px-5 text-[15px]",
+    sm: "h-7 px-3 text-[15.6px]",
+    md: "h-9 px-4 text-[16.9px]",
+    lg: "h-11 px-5 text-[19.5px]",
   }[size];
   const variants = {
     accent:
@@ -48,7 +48,7 @@ export const Button = forwardRef<HTMLButtonElement, BtnProps>(function Button(
 /* ---------------- fields ---------------- */
 
 const fieldBase =
-  "ig-field w-full rounded-[10px] border border-line2 bg-raise px-3 text-[13px] text-ink outline-none transition-all placeholder:text-faint";
+  "ig-field w-full rounded-[10px] border border-line2 bg-raise px-3 text-[16.9px] text-ink outline-none transition-all placeholder:text-faint";
 
 export const Input = forwardRef<
   HTMLInputElement,
@@ -101,7 +101,7 @@ export const Select = forwardRef<
 
 export function Label({ children }: { children: ReactNode }) {
   return (
-    <span className="mb-1.5 block text-[12.5px] text-dim">{children}</span>
+    <span className="mb-1.5 block text-[16.2px] text-dim">{children}</span>
   );
 }
 
@@ -131,7 +131,7 @@ export function Chip({
       title={title}
       onClick={onClick}
       className={cx(
-        "inline-flex max-w-full items-center gap-1 rounded-[5px] px-2 py-[3px] text-[10.5px] leading-tight transition-colors",
+        "inline-flex max-w-full items-center gap-1 rounded-[5px] px-2 py-[3px] text-[13.7px] leading-tight transition-colors",
         tones,
         onClick && "cursor-pointer hover:opacity-85",
       )}
@@ -146,7 +146,7 @@ export function Chip({
           }}
           className="-mr-0.5 shrink-0 opacity-60 transition-opacity hover:opacity-100"
         >
-          <X size={10} />
+          <X size={13} />
         </button>
       )}
     </Tag>
@@ -171,7 +171,7 @@ export function Fieldset({
         className,
       )}
     >
-      <legend className="px-1.5 text-[12px] text-dim">{legend}</legend>
+      <legend className="px-1.5 text-[15.6px] text-dim">{legend}</legend>
       {children}
     </fieldset>
   );
@@ -235,13 +235,13 @@ export function Modal({
         )}
       >
         <div className="flex items-center justify-between border-b border-line px-5 py-3">
-          <h2 className="text-[14px] font-medium">{title}</h2>
+          <h2 className="text-[18.2px] font-medium">{title}</h2>
           <button
             aria-label="Close"
             onClick={onClose}
             className="rounded p-1 text-dim transition-colors hover:bg-raise2 hover:text-ink"
           >
-            <X size={15} />
+            <X size={20} />
           </button>
         </div>
         <div className="max-h-[70vh] overflow-y-auto p-4 sm:p-5">{children}</div>
@@ -263,7 +263,7 @@ export function EmptyState({
     <div className="flex h-full flex-col items-center justify-center gap-5 py-16 text-center">
       <Cactus />
       <div>
-        <p className="font-script text-[34px] leading-none text-ink">
+        <p className="font-script text-[44.2px] leading-none text-ink">
           {caption}
         </p>
         <svg

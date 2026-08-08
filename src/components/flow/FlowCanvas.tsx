@@ -269,19 +269,19 @@ function Canvas({ flow }: { flow: Flow }) {
       <BoardBar
         crumbs={[{ label: "All", href: "/flow" }, { label: flow.name }]}
         createHref="/flow/new"
-        trailing={<Maximize2 size={11} className="text-faint" />}
+        trailing={<Maximize2 size={14} className="text-faint" />}
       />
 
       {/* ---- canvas toolbar ---- */}
       <div className="flex shrink-0 flex-wrap items-center gap-1.5 px-2.5 py-2 sm:px-3">
         <Button size="sm" variant="outline" onClick={addNode}>
-          <Plus size={12} /> Node
+          <Plus size={16} /> Node
         </Button>
         <Button size="sm" variant="ghost" onClick={duplicateSelected}>
-          <Copy size={12} /> Duplicate
+          <Copy size={16} /> Duplicate
         </Button>
         <Button size="sm" variant="ghost" onClick={deleteSelected}>
-          <Trash2 size={12} /> Delete
+          <Trash2 size={16} /> Delete
         </Button>
 
         <div className="ml-auto flex items-center gap-2">
@@ -302,7 +302,7 @@ function Canvas({ flow }: { flow: Flow }) {
                   }
                 }}
                 placeholder="Find a node…"
-                className="h-7 w-56 text-[12px]"
+                className="h-7 w-56 text-[15.6px]"
               />
               {matches.length > 0 && (
                 <div className="absolute right-0 top-9 z-30 w-56 overflow-hidden rounded-lg border border-line2 bg-panel shadow-2xl">
@@ -313,7 +313,7 @@ function Canvas({ flow }: { flow: Flow }) {
                         e.preventDefault();
                         fitView({ nodes: [n], duration: 400, padding: 2 });
                       }}
-                      className="block w-full truncate px-3 py-1.5 text-left text-[12px] text-dim transition-colors hover:bg-raise2 hover:text-ink"
+                      className="block w-full truncate px-3 py-1.5 text-left text-[15.6px] text-dim transition-colors hover:bg-raise2 hover:text-ink"
                     >
                       {String((n.data as FlowNodeData).label)}
                     </button>
@@ -327,10 +327,10 @@ function Canvas({ flow }: { flow: Flow }) {
               onClick={() => setSearchOpen(true)}
               className="rounded-md p-1.5 text-dim transition-colors hover:text-ink"
             >
-              <Search size={14} />
+              <Search size={18} />
             </button>
           )}
-          <span className="hidden text-[11px] text-faint sm:inline">
+          <span className="hidden text-[14.3px] text-faint sm:inline">
             {nodes.length} nodes · {edges.length} edges
           </span>
         </div>
@@ -366,7 +366,7 @@ function Canvas({ flow }: { flow: Flow }) {
           <Background
             variant={BackgroundVariant.Dots}
             gap={18}
-            size={1}
+            size={10}
             color="#1e1e1e"
           />
           <Controls

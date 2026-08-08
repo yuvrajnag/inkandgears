@@ -124,7 +124,7 @@ export function ManuscriptSearch({ onClose }: { onClose: () => void }) {
               key={k}
               onClick={() => setFilter(k)}
               className={cx(
-                "rounded-md border px-2 py-1 text-[11.5px] transition-colors",
+                "rounded-md border px-2 py-1 text-[15px] transition-colors",
                 filter === k
                   ? "border-accent/60 bg-accent/10 text-accent"
                   : "border-line2 text-dim hover:text-ink",
@@ -141,11 +141,11 @@ export function ManuscriptSearch({ onClose }: { onClose: () => void }) {
         </div>
 
         {q.trim().length < 2 ? (
-          <p className="py-8 text-center text-[12px] text-faint">
+          <p className="py-8 text-center text-[15.6px] text-faint">
             Type at least two characters.
           </p>
         ) : shown.length === 0 ? (
-          <p className="py-8 text-center text-[12px] text-faint">
+          <p className="py-8 text-center text-[15.6px] text-faint">
             No matches for “{q.trim()}”.
           </p>
         ) : (
@@ -157,12 +157,12 @@ export function ManuscriptSearch({ onClose }: { onClose: () => void }) {
                   className="w-full rounded-lg border border-line2 bg-raise px-3 py-2 text-left transition-colors hover:border-accent/50"
                 >
                   <div className="flex items-baseline justify-between gap-3">
-                    <span className="truncate text-[12.5px]">{h.title}</span>
-                    <span className="shrink-0 text-[10px] text-faint">
+                    <span className="truncate text-[16.2px]">{h.title}</span>
+                    <span className="shrink-0 text-[13px] text-faint">
                       {h.where}
                     </span>
                   </div>
-                  <p className="mt-0.5 line-clamp-2 text-[11px] leading-relaxed text-dim">
+                  <p className="mt-0.5 line-clamp-2 text-[14.3px] leading-relaxed text-dim">
                     {h.excerpt}
                   </p>
                 </button>

@@ -86,7 +86,7 @@ export function CreateEntity() {
         onCreate={save}
       />
 
-      <div className="min-h-0 flex-1 overflow-y-auto px-3 pb-8 pt-5 sm:px-5 sm:pt-7"><div className="mx-auto max-w-[880px]">
+      <div className="min-h-0 flex-1 overflow-y-auto px-4 pb-10 pt-6 sm:px-8 lg:px-14"><div className="mx-auto max-w-[880px]">
         <div className="grid gap-6 md:grid-cols-2 md:gap-10">
           {/* ---------- left: upload ---------- */}
           <div className="order-2 md:order-1">
@@ -114,9 +114,9 @@ export function CreateEntity() {
                   className="flex flex-col items-center gap-4 px-8 text-center"
                 >
                   <span className="grid h-12 w-12 place-items-center rounded-full border-[1.6px] border-ink/85">
-                    <ArrowUp size={22} strokeWidth={1.8} />
+                    <ArrowUp size={29} strokeWidth={1.8} />
                   </span>
-                  <span className="max-w-[190px] text-[12.5px] leading-relaxed text-ink/90">
+                  <span className="max-w-[190px] text-[16.2px] leading-relaxed text-ink/90">
                     Choose a file or drag and drop it here
                   </span>
                 </button>
@@ -140,7 +140,7 @@ export function CreateEntity() {
                         }
                         className="absolute right-1 top-1 hidden rounded-full bg-black/70 p-1 text-white group-hover:block"
                       >
-                        <X size={11} />
+                        <X size={14} />
                       </button>
                     </div>
                   ))}
@@ -149,7 +149,7 @@ export function CreateEntity() {
                     aria-label="Add more images"
                     className="grid aspect-square place-items-center rounded-lg border border-dashed border-line2 text-faint transition-colors hover:border-accent/60 hover:text-accent"
                   >
-                    <Plus size={18} />
+                    <Plus size={23} />
                   </button>
                 </div>
               )}
@@ -168,7 +168,7 @@ export function CreateEntity() {
 
             <Button
               size="lg"
-              className="mt-5 w-full text-[17px] font-semibold"
+              className="mt-5 w-full text-[22.1px] font-semibold"
               onClick={save}
             >
               Save
@@ -188,7 +188,7 @@ export function CreateEntity() {
                 aria-invalid={touched && !name.trim()}
               />
               {touched && !name.trim() && (
-                <p className="mt-1.5 text-[11.5px] text-red-300">
+                <p className="mt-1.5 text-[15px] text-red-300">
                   Give it a name first.
                 </p>
               )}
@@ -262,7 +262,7 @@ export function CreateEntity() {
                       value={dLabel}
                       onChange={(e) => setDLabel(e.target.value)}
                       placeholder="Field"
-                      className="h-8 w-[110px] text-[12px]"
+                      className="h-8 w-[110px] text-[15.6px]"
                     />
                     <Input
                       value={dValue}
@@ -282,7 +282,7 @@ export function CreateEntity() {
                         }
                       }}
                       placeholder="Value"
-                      className="h-8 min-w-[120px] flex-1 text-[12px]"
+                      className="h-8 min-w-[120px] flex-1 text-[15.6px]"
                     />
                     <Button
                       size="sm"

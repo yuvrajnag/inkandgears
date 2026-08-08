@@ -15,9 +15,9 @@ const KEYS: [string, string][] = [
 export function HelpSheet({ onClose }: { onClose: () => void }) {
   return (
     <Modal title="Help" onClose={onClose} width="max-w-2xl">
-      <div className="space-y-6 text-[13px] leading-relaxed text-ink/90">
+      <div className="space-y-6 text-[16.9px] leading-relaxed text-ink/90">
         <section>
-          <h3 className="mb-2 font-display text-[16px] text-ink">
+          <h3 className="mb-2 font-display text-[20.8px] text-ink">
             The four modules
           </h3>
           <dl className="space-y-1.5 text-dim">
@@ -41,7 +41,7 @@ export function HelpSheet({ onClose }: { onClose: () => void }) {
         </section>
 
         <section>
-          <h3 className="mb-2 font-display text-[16px] text-ink">
+          <h3 className="mb-2 font-display text-[20.8px] text-ink">
             Slash commands
           </h3>
           <p className="mb-2.5 text-dim">
@@ -54,7 +54,7 @@ export function HelpSheet({ onClose }: { onClose: () => void }) {
             {ENTITY_KINDS.map((k) => (
               <span
                 key={k.kind}
-                className="rounded-md border border-line2 bg-raise px-2 py-1 text-[11.5px]"
+                className="rounded-md border border-line2 bg-raise px-2 py-1 text-[15px]"
               >
                 <code className="font-mono text-accent">/{k.slash}</code>
                 <span className="ml-1.5 text-dim">{k.label}</span>
@@ -64,12 +64,12 @@ export function HelpSheet({ onClose }: { onClose: () => void }) {
         </section>
 
         <section>
-          <h3 className="mb-2 font-display text-[16px] text-ink">Shortcuts</h3>
+          <h3 className="mb-2 font-display text-[20.8px] text-ink">Shortcuts</h3>
           <dl className="grid grid-cols-1 gap-1.5 sm:grid-cols-2">
             {KEYS.map(([k, v]) => (
               <div key={k} className="flex items-baseline gap-2">
                 <dt>
-                  <kbd className="rounded border border-line2 bg-raise px-1.5 py-0.5 font-mono text-[11px] text-ink">
+                  <kbd className="rounded border border-line2 bg-raise px-1.5 py-0.5 font-mono text-[14.3px] text-ink">
                     {k}
                   </kbd>
                 </dt>
@@ -80,7 +80,7 @@ export function HelpSheet({ onClose }: { onClose: () => void }) {
         </section>
 
         <section>
-          <h3 className="mb-2 font-display text-[16px] text-ink">Your work</h3>
+          <h3 className="mb-2 font-display text-[20.8px] text-ink">Your work</h3>
           <p className="text-dim">
             Everything lives in this browser and autosaves as you type. Use the
             caret next to undo/redo in the top-left to export a full JSON backup

@@ -108,22 +108,22 @@ export function AppShell({ children }: { children: ReactNode }) {
           <div className="flex items-start justify-between">
             <div className="flex items-center gap-2.5 text-dim">
               <IconBtn label="Save project" onClick={save}>
-                <Save size={15} strokeWidth={1.7} />
+                <Save size={20} strokeWidth={1.7} />
               </IconBtn>
               <IconBtn
                 label="Undo"
                 disabled={!history?.canUndo}
                 onClick={() => history?.undo()}
               >
-                <Undo2 size={15} strokeWidth={1.7} />
+                <Undo2 size={20} strokeWidth={1.7} />
               </IconBtn>
-              <ChevronDown size={9} className="-ml-1.5 text-faint" />
+              <ChevronDown size={12} className="-ml-1.5 text-faint" />
               <IconBtn
                 label="Redo"
                 disabled={!history?.canRedo}
                 onClick={() => history?.redo()}
               >
-                <Redo2 size={15} strokeWidth={1.7} />
+                <Redo2 size={20} strokeWidth={1.7} />
               </IconBtn>
               <button
                 aria-label="Project menu"
@@ -131,7 +131,7 @@ export function AppShell({ children }: { children: ReactNode }) {
                 onClick={() => setMenuOpen((v) => !v)}
                 className="-ml-1.5 rounded p-0.5 text-faint transition-colors hover:text-ink"
               >
-                <ChevronDown size={9} />
+                <ChevronDown size={12} />
               </button>
             </div>
 
@@ -145,7 +145,7 @@ export function AppShell({ children }: { children: ReactNode }) {
 
             <button
               onClick={() => setHelpOpen(true)}
-              className="text-[13px] text-ink/90 transition-colors hover:text-accent"
+              className="text-[16.9px] text-ink/90 transition-colors hover:text-accent"
             >
               Help
             </button>
@@ -164,7 +164,7 @@ export function AppShell({ children }: { children: ReactNode }) {
                   href={t.href}
                   aria-current={active ? "page" : undefined}
                   className={[
-                    "pb-0.5 text-[13.5px] transition-colors",
+                    "pb-0.5 text-[17.6px] transition-colors",
                     active
                       ? "text-ink underline decoration-1 underline-offset-4"
                       : "text-ink/85 hover:text-ink",
@@ -192,7 +192,7 @@ export function AppShell({ children }: { children: ReactNode }) {
         {toastMsg && (
           <div
             role="status"
-            className="pointer-events-none fixed bottom-6 left-1/2 z-50 -translate-x-1/2 rounded-full border border-line2 bg-raise px-4 py-2 text-[12.5px] text-ink shadow-2xl"
+            className="pointer-events-none fixed bottom-6 left-1/2 z-50 -translate-x-1/2 rounded-full border border-line2 bg-raise px-4 py-2 text-[16.2px] text-ink shadow-2xl"
           >
             {toastMsg}
           </div>

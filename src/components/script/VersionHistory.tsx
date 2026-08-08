@@ -30,7 +30,7 @@ export function VersionHistory({
     <Modal title="Version history" onClose={onClose} width="max-w-xl">
       <div className="space-y-3">
         <div className="flex items-center justify-between">
-          <p className="text-[12px] text-dim">
+          <p className="text-[15.6px] text-dim">
             Restore points are taken automatically as you write.
           </p>
           <Button
@@ -45,7 +45,7 @@ export function VersionHistory({
         </div>
 
         {mine.length === 0 ? (
-          <p className="rounded-xl border border-line2 bg-raise px-3 py-6 text-center text-[12px] text-faint">
+          <p className="rounded-xl border border-line2 bg-raise px-3 py-6 text-center text-[15.6px] text-faint">
             No restore points for this scene yet.
           </p>
         ) : (
@@ -61,10 +61,10 @@ export function VersionHistory({
                   className="rounded-xl border border-line2 bg-raise p-3"
                 >
                   <div className="flex items-baseline justify-between gap-3">
-                    <p className="text-[12px]">
+                    <p className="text-[15.6px]">
                       {new Date(v.at).toLocaleString()}
                     </p>
-                    <span className="text-[11px] text-faint">
+                    <span className="text-[14.3px] text-faint">
                       {delta === 0
                         ? "same length"
                         : delta > 0
@@ -72,7 +72,7 @@ export function VersionHistory({
                           : `${Math.abs(delta)} words fewer than now`}
                     </span>
                   </div>
-                  <p className="mt-1.5 line-clamp-2 text-[11.5px] leading-relaxed text-dim">
+                  <p className="mt-1.5 line-clamp-2 text-[15px] leading-relaxed text-dim">
                     {text.slice(0, 220) || "(empty)"}
                   </p>
                   <div className="mt-2">

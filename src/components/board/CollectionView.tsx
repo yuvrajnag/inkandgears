@@ -54,9 +54,9 @@ export function CollectionView() {
         createHref={routes.newEntity(board.id)}
       />
 
-      <div className="min-h-0 flex-1 overflow-y-auto px-3 pb-8 pt-4 sm:px-5">
+      <div className="min-h-0 flex-1 overflow-y-auto px-4 pb-10 pt-5 sm:px-8 lg:px-14">
         <div className="mb-4 flex items-center justify-between">
-          <h1 className="font-display text-[22px] font-bold leading-none sm:text-[27px]">
+          <h1 className="font-display text-[28.6px] font-bold leading-none sm:text-[35.1px]">
             {board.name}
           </h1>
           <button
@@ -68,7 +68,7 @@ export function CollectionView() {
               dense ? "bg-raise2 text-ink" : "text-dim hover:text-ink",
             )}
           >
-            <SlidersHorizontal size={17} strokeWidth={1.6} />
+            <SlidersHorizontal size={22} strokeWidth={1.6} />
           </button>
         </div>
 
@@ -106,10 +106,10 @@ export function CollectionView() {
                       />
                     ) : (
                       <div className="grid h-full place-items-center text-faint">
-                        <ImageOff size={18} strokeWidth={1.6} />
+                        <ImageOff size={23} strokeWidth={1.6} />
                       </div>
                     )}
-                    <span className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 to-transparent px-3 pb-2 pt-8 text-[12px] font-medium">
+                    <span className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 to-transparent px-3 pb-2 pt-8 text-[15.6px] font-medium">
                       {e.name}
                     </span>
                   </div>

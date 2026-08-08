@@ -59,14 +59,14 @@ export function Home() {
         {/* ---- header ---- */}
         <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
           <div>
-            <p className="mb-1 text-[11px] uppercase tracking-[0.18em] text-faint">
+            <p className="mb-1 text-[14.3px] uppercase tracking-[0.18em] text-faint">
               Project
             </p>
             <input
               value={projectName}
               onChange={(e) => setProjectName(e.target.value)}
               aria-label="Project name"
-              className="w-full max-w-md bg-transparent font-display text-[26px] font-bold leading-none outline-none focus:text-accent-soft sm:text-[34px]"
+              className="w-full max-w-md bg-transparent font-display text-[33.8px] font-bold leading-none outline-none focus:text-accent-soft sm:text-[44.2px]"
             />
           </div>
           <div className="flex gap-1 rounded-lg border border-line2 bg-raise p-1">
@@ -80,7 +80,7 @@ export function Home() {
                 key={k}
                 onClick={() => setTab(k)}
                 className={cx(
-                  "rounded-md px-3 py-1.5 text-[12px] transition-colors",
+                  "rounded-md px-3 py-1.5 text-[15.6px] transition-colors",
                   tab === k
                     ? "bg-accent/15 text-accent"
                     : "text-dim hover:text-ink",
@@ -96,7 +96,7 @@ export function Home() {
         <div className="mb-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           <ModuleCard
             href="/script"
-            icon={<PenLine size={16} />}
+            icon={<PenLine size={21} />}
             title="Draft Canvas"
             sub="Script"
             stat={`${totalWords.toLocaleString()} words`}
@@ -104,7 +104,7 @@ export function Home() {
           />
           <ModuleCard
             href="/board"
-            icon={<Boxes size={16} />}
+            icon={<Boxes size={21} />}
             title="World Matrix"
             sub="Board"
             stat={`${entities.length} entries`}
@@ -112,7 +112,7 @@ export function Home() {
           />
           <ModuleCard
             href="/flow"
-            icon={<Workflow size={16} />}
+            icon={<Workflow size={21} />}
             title="Thread Map"
             sub="Flow"
             stat={`${flows.length} flow${flows.length === 1 ? "" : "s"}`}
@@ -123,7 +123,7 @@ export function Home() {
         {tab === "cosmos" ? (
           <div className="grid gap-6 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)]">
             <section>
-              <h2 className="mb-3 text-[13px] font-medium">Recent scenes</h2>
+              <h2 className="mb-3 text-[16.9px] font-medium">Recent scenes</h2>
               <ul className="space-y-1.5">
                 {recent.map((sc) => {
                   const ch = chapters.find((c) => c.id === sc.chapterId);
@@ -135,15 +135,15 @@ export function Home() {
                         className="group flex items-center gap-3 rounded-xl border border-line bg-raise/50 px-3.5 py-2.5 transition-colors hover:border-accent/40"
                       >
                         <span className="min-w-0 flex-1">
-                          <span className="block truncate text-[13px]">
+                          <span className="block truncate text-[16.9px]">
                             {sc.title}
                           </span>
-                          <span className="block truncate text-[11px] text-faint">
+                          <span className="block truncate text-[14.3px] text-faint">
                             {ch?.title} · {sc.status} · {sc.words} words
                           </span>
                         </span>
                         <ArrowRight
-                          size={14}
+                          size={18}
                           className="shrink-0 text-faint transition-transform group-hover:translate-x-0.5 group-hover:text-accent"
                         />
                       </Link>
@@ -151,7 +151,7 @@ export function Home() {
                   );
                 })}
                 {recent.length === 0 && (
-                  <li className="rounded-xl border border-line bg-raise/50 px-3.5 py-6 text-center text-[12px] text-faint">
+                  <li className="rounded-xl border border-line bg-raise/50 px-3.5 py-6 text-center text-[15.6px] text-faint">
                     No scenes yet.
                   </li>
                 )}
@@ -159,8 +159,8 @@ export function Home() {
             </section>
 
             <section>
-              <h2 className="mb-3 text-[13px] font-medium">Continuity</h2>
-              <div className="space-y-2 rounded-xl border border-line bg-raise/50 p-3.5 text-[12px]">
+              <h2 className="mb-3 text-[16.9px] font-medium">Continuity</h2>
+              <div className="space-y-2 rounded-xl border border-line bg-raise/50 p-3.5 text-[15.6px]">
                 <Row
                   label="Saved"
                   value={
@@ -178,8 +178,8 @@ export function Home() {
                   label="Reading time"
                   value={`${Math.max(1, Math.round(totalWords / 230))} min`}
                 />
-                <p className="border-t border-line pt-2.5 text-[11px] leading-relaxed text-faint">
-                  <Clock size={11} className="mr-1 inline align-[-1px]" />
+                <p className="border-t border-line pt-2.5 text-[14.3px] leading-relaxed text-faint">
+                  <Clock size={14} className="mr-1 inline align-[-1px]" />
                   Everything is stored in this browser and saves as you type.
                   Export a backup from the caret beside undo.
                 </p>
@@ -190,8 +190,8 @@ export function Home() {
           <div className="space-y-6">
             <section>
               <div className="mb-3 flex items-center gap-2">
-                <Activity size={14} className="text-accent" />
-                <h2 className="text-[13px] font-medium">
+                <Activity size={18} className="text-accent" />
+                <h2 className="text-[16.9px] font-medium">
                   Tension across the reading order
                 </h2>
               </div>
@@ -199,7 +199,7 @@ export function Home() {
                 points={points}
                 onPick={(id) => setActiveScene(id)}
               />
-              <p className="mt-2 text-[11px] leading-relaxed text-faint">
+              <p className="mt-2 text-[14.3px] leading-relaxed text-faint">
                 Measured from sentence length, charged vocabulary, and how many
                 characters share the page. It describes the shape of your prose
                 — it does not predict how anyone will feel reading it.
@@ -208,11 +208,11 @@ export function Home() {
 
             <div className="grid gap-6 lg:grid-cols-2">
               <section>
-                <h2 className="mb-3 text-[13px] font-medium">
+                <h2 className="mb-3 text-[16.9px] font-medium">
                   Character presence
                 </h2>
                 {cast.length === 0 ? (
-                  <p className="rounded-xl border border-line bg-raise/50 px-3.5 py-6 text-center text-[12px] text-faint">
+                  <p className="rounded-xl border border-line bg-raise/50 px-3.5 py-6 text-center text-[15.6px] text-faint">
                     Nothing linked into scenes yet.
                   </p>
                 ) : (
@@ -223,7 +223,7 @@ export function Home() {
                           href={routes.entity(c.entity.id)}
                           className="flex items-center gap-3 rounded-lg border border-line bg-raise/50 px-3 py-2 transition-colors hover:border-accent/40"
                         >
-                          <span className="w-20 shrink-0 truncate text-[12px] sm:w-28">
+                          <span className="w-20 shrink-0 truncate text-[15.6px] sm:w-28">
                             {c.entity.name}
                           </span>
                           <span className="h-1.5 flex-1 overflow-hidden rounded-full bg-raise2">
@@ -234,7 +234,7 @@ export function Home() {
                               }}
                             />
                           </span>
-                          <span className="w-16 shrink-0 text-right text-[10.5px] text-faint">
+                          <span className="w-16 shrink-0 text-right text-[13.7px] text-faint">
                             {c.scenes} scene{c.scenes === 1 ? "" : "s"}
                           </span>
                         </Link>
@@ -245,11 +245,11 @@ export function Home() {
               </section>
 
               <section>
-                <h2 className="mb-3 text-[13px] font-medium">
+                <h2 className="mb-3 text-[16.9px] font-medium">
                   What the text is telling you
                 </h2>
                 {issues.length === 0 ? (
-                  <p className="rounded-xl border border-line bg-raise/50 px-3.5 py-6 text-center text-[12px] text-faint">
+                  <p className="rounded-xl border border-line bg-raise/50 px-3.5 py-6 text-center text-[15.6px] text-faint">
                     Nothing worth flagging — or not enough written yet.
                   </p>
                 ) : (
@@ -258,7 +258,7 @@ export function Home() {
                       <li
                         key={i}
                         className={cx(
-                          "rounded-lg border bg-raise/50 px-3 py-2 text-[11.5px] leading-relaxed",
+                          "rounded-lg border bg-raise/50 px-3 py-2 text-[15px] leading-relaxed",
                           f.level === "warn"
                             ? "border-amber-500/25 text-amber-100/80"
                             : "border-line text-dim",
@@ -273,7 +273,7 @@ export function Home() {
             </div>
 
             <section>
-              <h2 className="mb-3 text-[13px] font-medium">Chapter pacing</h2>
+              <h2 className="mb-3 text-[16.9px] font-medium">Chapter pacing</h2>
               <div className="flex flex-wrap gap-1.5">
                 {chapters
                   .sort((a, b) => a.order - b.order)
@@ -285,8 +285,8 @@ export function Home() {
                         key={ch.id}
                         className="rounded-lg border border-line bg-raise/50 px-3 py-2"
                       >
-                        <p className="text-[12px]">{ch.title}</p>
-                        <p className="text-[10.5px] text-faint">
+                        <p className="text-[15.6px]">{ch.title}</p>
+                        <p className="text-[13.7px] text-faint">
                           {list.length} scenes · {words} words
                         </p>
                       </div>
@@ -325,15 +325,15 @@ function ModuleCard({
         <span className="text-dim transition-colors group-hover:text-accent">
           {icon}
         </span>
-        <span className="text-[10px] uppercase tracking-wider text-faint">
+        <span className="text-[13px] uppercase tracking-wider text-faint">
           {sub}
         </span>
       </div>
-      <p className="text-[14px] font-medium">{title}</p>
-      <p className="mt-1.5 text-[19px] font-semibold text-accent-soft">
+      <p className="text-[18.2px] font-medium">{title}</p>
+      <p className="mt-1.5 text-[24.7px] font-semibold text-accent-soft">
         {stat}
       </p>
-      <p className="text-[11px] text-faint">{detail}</p>
+      <p className="text-[14.3px] text-faint">{detail}</p>
     </Link>
   );
 }

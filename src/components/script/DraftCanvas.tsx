@@ -161,35 +161,27 @@ export function DraftCanvas() {
       <div className="flex min-h-0 flex-1">
         {treeOpen && <SceneTree onClose={() => setTreeOpen(false)} />}
 
-        <div className="relative min-h-0 flex-1 overflow-y-auto">
-          <div
-            className={cx(
-              // Left-aligned measure, not centred — the writing starts where
-              // the panel starts, the way the reference sets it.
-              "w-full px-4 pb-32 pt-6 sm:px-8 sm:pt-8",
-              simpleMode ? "mx-auto max-w-[720px]" : "max-w-[900px]",
-              focusMode && "ig-focus",
-            )}
-          >
-            {!simpleMode && (
-              <input
-                value={scene.title}
-                onChange={(e) =>
-                  updateScene(scene.id, { title: e.target.value })
-                }
-                aria-label="Scene title"
-                className="mb-5 w-full bg-transparent font-display text-[20px] font-bold outline-none placeholder:text-faint focus:text-accent-soft sm:text-[24px]"
-                placeholder="Untitled scene"
-              />
-            )}
-            <EditorContent editor={editor} />
+        {/* The reference frames the page itself inside the module panel. */}
+        <div className="relative min-h-0 flex-1 p-2 sm:p-2.5">
+          <div className="h-full overflow-y-auto rounded-xl border border-line bg-void">
+            <div
+              className={cx(
+                // Left-aligned measure — the writing starts where the page
+                // starts, the way the reference sets it.
+                "w-full px-5 pb-32 pt-6 sm:px-10 sm:pt-8",
+                simpleMode ? "mx-auto max-w-[760px]" : "max-w-[940px]",
+                focusMode && "ig-focus",
+              )}
+            >
+              <EditorContent editor={editor} />
+            </div>
           </div>
 
           {/* save indicator */}
           <div
             aria-live="polite"
             className={cx(
-              "pointer-events-none fixed bottom-6 left-1/2 -translate-x-1/2 text-[11px] transition-opacity",
+              "pointer-events-none fixed bottom-6 left-1/2 -translate-x-1/2 text-[14.3px] transition-opacity",
               saving === "idle" ? "opacity-0" : "opacity-100",
               saving === "saving" ? "text-faint" : "text-dim",
             )}

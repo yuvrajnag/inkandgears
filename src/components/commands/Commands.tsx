@@ -144,27 +144,27 @@ export function Commands() {
           open && "opacity-0",
         )}
       >
-        <Sparkles size={17} strokeWidth={1.7} />
+        <Sparkles size={22} strokeWidth={1.7} />
       </button>
 
       {open && (
         <div className="fixed bottom-5 right-5 z-50 flex max-h-[min(640px,85vh)] w-[min(440px,calc(100vw-2.5rem))] flex-col overflow-hidden rounded-2xl border border-line2 bg-panel shadow-2xl">
           <header className="flex items-center justify-between border-b border-line px-4 py-2.5">
             <div className="flex items-center gap-2">
-              <Sparkles size={14} className="text-accent" />
-              <h2 className="text-[13px] font-medium">Commands</h2>
+              <Sparkles size={18} className="text-accent" />
+              <h2 className="text-[16.9px] font-medium">Commands</h2>
             </div>
             <button
               aria-label="Close Commands"
               onClick={() => setOpen(false)}
               className="rounded p-1 text-dim transition-colors hover:bg-raise2 hover:text-ink"
             >
-              <X size={14} />
+              <X size={18} />
             </button>
           </header>
 
           <div className="min-h-0 flex-1 overflow-y-auto px-4 py-3">
-            <p className="mb-2 text-[11px] text-faint">
+            <p className="mb-2 text-[14.3px] text-faint">
               Context:{" "}
               <span className="text-dim">
                 {scene ? scene.title : "no scene selected"}
@@ -181,7 +181,7 @@ export function Commands() {
                   key={a.id}
                   onClick={() => setAction(a)}
                   className={cx(
-                    "rounded-md border px-2 py-1 text-[11px] transition-colors",
+                    "rounded-md border px-2 py-1 text-[14.3px] transition-colors",
                     a.id === action.id
                       ? "border-accent/60 bg-accent/10 text-accent"
                       : "border-line2 text-dim hover:border-line2 hover:text-ink",
@@ -195,7 +195,7 @@ export function Commands() {
             {result && (
               <div className="mb-3 rounded-xl border border-line2 bg-raise">
                 <div className="flex items-center justify-between border-b border-line px-3 py-1.5">
-                  <span className="text-[11px] text-dim">
+                  <span className="text-[14.3px] text-dim">
                     Preview · {result.action.label}
                     {result.source === "local" && (
                       <span className="ml-1.5 text-faint">
@@ -208,10 +208,10 @@ export function Commands() {
                     aria-label="Reject suggestion"
                     className="text-faint transition-colors hover:text-ink"
                   >
-                    <X size={12} />
+                    <X size={16} />
                   </button>
                 </div>
-                <div className="max-h-56 overflow-y-auto whitespace-pre-wrap px-3 py-2.5 text-[12.5px] leading-relaxed text-ink/90">
+                <div className="max-h-56 overflow-y-auto whitespace-pre-wrap px-3 py-2.5 text-[16.2px] leading-relaxed text-ink/90">
                   {result.text}
                 </div>
                 <div className="border-t border-line px-3 py-2">
@@ -222,7 +222,7 @@ export function Commands() {
                       disabled={!scene}
                       className="shrink-0 whitespace-nowrap"
                     >
-                      <Check size={12} /> Insert below
+                      <Check size={16} /> Insert below
                     </Button>
                     <Button
                       size="sm"
@@ -230,10 +230,10 @@ export function Commands() {
                       onClick={run}
                       className="shrink-0 whitespace-nowrap"
                     >
-                      <RotateCcw size={12} /> Try again
+                      <RotateCcw size={16} /> Try again
                     </Button>
                   </div>
-                  <p className="mt-1.5 text-[10.5px] text-faint">
+                  <p className="mt-1.5 text-[13.7px] text-faint">
                     Nothing is written until you accept.
                   </p>
                 </div>
@@ -241,13 +241,13 @@ export function Commands() {
             )}
 
             {error && (
-              <p className="mb-3 rounded-lg border border-red-500/30 bg-red-500/5 px-3 py-2 text-[12px] text-red-300">
+              <p className="mb-3 rounded-lg border border-red-500/30 bg-red-500/5 px-3 py-2 text-[15.6px] text-red-300">
                 {error}
               </p>
             )}
 
             {!result && !busy && (
-              <p className="text-[12px] leading-relaxed text-faint">
+              <p className="text-[15.6px] leading-relaxed text-faint">
                 {action.hint}
               </p>
             )}
@@ -267,7 +267,7 @@ export function Commands() {
                   }
                 }}
                 placeholder={`${action.label}…  (Enter to run)`}
-                className="ig-field w-full resize-none rounded-[10px] border border-line2 bg-raise py-2.5 pl-3 pr-11 text-[12.5px] outline-none placeholder:text-faint"
+                className="ig-field w-full resize-none rounded-[10px] border border-line2 bg-raise py-2.5 pl-3 pr-11 text-[16.2px] outline-none placeholder:text-faint"
               />
               <button
                 onClick={run}
@@ -276,13 +276,13 @@ export function Commands() {
                 className="absolute bottom-2 right-2 grid h-7 w-7 place-items-center rounded-lg bg-accent text-black transition-opacity hover:opacity-85 disabled:opacity-40"
               >
                 {busy ? (
-                  <Loader2 size={13} className="animate-spin" />
+                  <Loader2 size={17} className="animate-spin" />
                 ) : (
-                  <ArrowUp size={13} />
+                  <ArrowUp size={17} />
                 )}
               </button>
             </div>
-            <p className="mt-1.5 text-[10px] text-faint">
+            <p className="mt-1.5 text-[13px] text-faint">
               {STATIC
                 ? "This build has no server, so nothing you write leaves the browser."
                 : "Your writing is only sent to a model when one is configured for this deployment."}

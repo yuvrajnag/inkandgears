@@ -21,7 +21,7 @@ export function FlowHome() {
       <BoardBar
         crumbs={[{ label: "All" }]}
         createHref="/flow/new"
-        trailing={<Maximize2 size={11} className="text-faint" />}
+        trailing={<Maximize2 size={14} className="text-faint" />}
       />
 
       {flows.length === 0 ? (
@@ -29,7 +29,7 @@ export function FlowHome() {
           <EmptyState />
         </div>
       ) : (
-        <div className="min-h-0 flex-1 overflow-y-auto px-3 pb-8 pt-4 sm:px-5 sm:pt-5">
+        <div className="min-h-0 flex-1 overflow-y-auto px-4 pb-10 pt-5 sm:px-8 lg:px-14">
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {flows.map((f) => (
               <div key={f.id} className="group relative">
@@ -39,8 +39,8 @@ export function FlowHome() {
                 >
                   <FlowThumb nodes={f.nodes} edges={f.edges} />
                   <div className="border-t border-line px-3 py-2.5">
-                    <p className="truncate text-[13px] font-medium">{f.name}</p>
-                    <p className="mt-0.5 text-[11px] text-faint">
+                    <p className="truncate text-[16.9px] font-medium">{f.name}</p>
+                    <p className="mt-0.5 text-[14.3px] text-faint">
                       {f.scope} · {f.direction} · {f.nodes.length} node
                       {f.nodes.length === 1 ? "" : "s"}
                     </p>
@@ -53,7 +53,7 @@ export function FlowHome() {
                   }}
                   className="absolute right-2 top-2 hidden rounded-md bg-black/70 p-1.5 text-dim backdrop-blur transition-colors hover:text-red-400 group-hover:block"
                 >
-                  <Trash2 size={12} />
+                  <Trash2 size={16} />
                 </button>
               </div>
             ))}

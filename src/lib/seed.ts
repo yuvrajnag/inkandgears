@@ -1,5 +1,5 @@
 import { nanoid } from "nanoid";
-import { PLATES } from "./art";
+import { asset } from "./asset";
 import type {
   Board,
   Chapter,
@@ -11,6 +11,17 @@ import type {
 } from "./types";
 
 const now = Date.now();
+
+/**
+ * Seed imagery.
+ *
+ * These are cropped from the project's own design mockups, so the sample story
+ * looks the way the reference does. They are screenshot-resolution — swap in
+ * the master files (same names, `public/seed/`) for anything shipping.
+ */
+function art(name: string) {
+  return asset(`/seed/${name}.jpg`);
+}
 
 function detail(label: string, value: string, type: Detail["type"] = "text") {
   return { id: nanoid(8), label, value, type };
@@ -41,9 +52,9 @@ export function buildSeed() {
     description:
       "Aetherfall Haven is a tranquil skybound sanctuary where the protagonist was born, surrounded by flowing waterfalls, gentle winds, and a community filled with warmth, harmony, and joyful days.",
     images: [
-      { id: nanoid(8), src: PLATES.haven(), name: "haven-falls" },
-      { id: nanoid(8), src: PLATES.havenDusk(), name: "haven-dusk" },
-      { id: nanoid(8), src: PLATES.havenDawn(), name: "haven-dawn" },
+      { id: nanoid(8), src: art("loc-falls"), name: "haven-falls" },
+      { id: nanoid(8), src: art("loc-redwood"), name: "haven-dusk" },
+      { id: nanoid(8), src: art("loc-blossom"), name: "haven-dawn" },
     ],
     coverIndex: 0,
     details: [
@@ -64,7 +75,7 @@ export function buildSeed() {
     boardId: "bd_loc",
     description:
       "A torii standing in still water at the edge of the world. Nobody remembers who raised it, only that it was already old when the Haven was young.",
-    images: [{ id: nanoid(8), src: PLATES.gate(), name: "gate" }],
+    images: [{ id: nanoid(8), src: art("loc-torii"), name: "gate" }],
     coverIndex: 0,
     details: [
       detail("Region", "The Shallows"),
@@ -83,7 +94,7 @@ export function buildSeed() {
     boardId: "bd_loc",
     description:
       "Where the eclipse never finishes. Light bends the wrong way here and the roads stop agreeing with the maps.",
-    images: [{ id: nanoid(8), src: PLATES.eclipse(), name: "eclipse" }],
+    images: [{ id: nanoid(8), src: art("loc-eclipse"), name: "eclipse" }],
     coverIndex: 0,
     details: [
       detail("Climate", "Perpetual half-light"),
@@ -101,7 +112,7 @@ export function buildSeed() {
     boardId: "bd_loc",
     description:
       "A mountain shrine under permanent autumn, kept by a caretaker who has outlived four generations of pilgrims.",
-    images: [{ id: nanoid(8), src: PLATES.shrine(), name: "shrine" }],
+    images: [{ id: nanoid(8), src: art("loc-shrine"), name: "shrine" }],
     coverIndex: 0,
     details: [
       detail("Region", "Redleaf Ridge"),
@@ -119,7 +130,7 @@ export function buildSeed() {
     boardId: "bd_char",
     description:
       "Born in the Haven, raised on stories about everywhere else. Kael leaves because staying would be the only thing he could never forgive himself for.",
-    images: [{ id: nanoid(8), src: PLATES.hero(), name: "kael" }],
+    images: [{ id: nanoid(8), src: art("char-hood"), name: "kael" }],
     coverIndex: 0,
     details: [
       detail("", "#7FD8FF", "color"),
@@ -141,7 +152,7 @@ export function buildSeed() {
     boardId: "bd_char",
     description:
       "Keeps the Haven's records and its silences. Knows exactly which of the two matters more.",
-    images: [{ id: nanoid(8), src: PLATES.elder(), name: "sora" }],
+    images: [{ id: nanoid(8), src: art("char-glasses"), name: "sora" }],
     coverIndex: 0,
     details: [
       detail("Age", "71", "number"),
@@ -161,7 +172,7 @@ export function buildSeed() {
     boardId: "bd_char",
     description:
       "Came through the Gate once and would not say what he saw. He has been walking back toward it ever since.",
-    images: [{ id: nanoid(8), src: PLATES.knight(), name: "knight" }],
+    images: [{ id: nanoid(8), src: art("char-suit"), name: "knight" }],
     coverIndex: 0,
     details: [
       detail("Role", "Antagonist"),
@@ -181,7 +192,7 @@ export function buildSeed() {
     boardId: "bd_char",
     description:
       "Kael's oldest friend and the only person in the Haven who wanted to leave more than he did.",
-    images: [{ id: nanoid(8), src: PLATES.rival(), name: "yura" }],
+    images: [{ id: nanoid(8), src: art("char-dark"), name: "yura" }],
     coverIndex: 0,
     details: [
       detail("Age", "20", "number"),

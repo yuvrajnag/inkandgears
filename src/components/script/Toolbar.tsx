@@ -121,57 +121,57 @@ export function Toolbar({
           active={editor?.isActive("bold")}
           onClick={() => editor?.chain().focus().toggleBold().run()}
         >
-          <Bold size={15} />
+          <Bold size={20} />
         </Tool>
         <Tool
           label="Italic"
           active={editor?.isActive("italic")}
           onClick={() => editor?.chain().focus().toggleItalic().run()}
         >
-          <Italic size={15} />
+          <Italic size={20} />
         </Tool>
         <Tool
           label="Underline"
           active={editor?.isActive("underline")}
           onClick={() => editor?.chain().focus().toggleUnderline().run()}
         >
-          <Underline size={15} />
+          <Underline size={20} />
         </Tool>
         <Tool
           label="Bullet list"
           active={editor?.isActive("bulletList")}
           onClick={() => editor?.chain().focus().toggleBulletList().run()}
         >
-          <List size={15} />
+          <List size={20} />
         </Tool>
         <Tool
           label="Quote"
           active={editor?.isActive("blockquote")}
           onClick={() => editor?.chain().focus().toggleBlockquote().run()}
         >
-          <Quote size={15} />
+          <Quote size={20} />
         </Tool>
 
         <Divider />
         <Tool label="Chapters and scenes" onClick={onOpenManage}>
-          <BookMarked size={15} />
+          <BookMarked size={20} />
         </Tool>
         <Tool label="Scene notes and metadata" onClick={onOpenMeta}>
-          <MessageSquarePlus size={15} />
+          <MessageSquarePlus size={20} />
         </Tool>
         <Tool label="Search the manuscript" onClick={onOpenSearch}>
-          <Search size={15} />
+          <Search size={20} />
         </Tool>
         <Tool label="New scene" onClick={onNewScene}>
-          <FilePlus2 size={15} />
+          <FilePlus2 size={20} />
         </Tool>
 
-        <span className="ml-auto flex shrink-0 items-center gap-2.5 pl-3 text-[11px] text-faint">
+        <span className="flex shrink-0 items-center gap-2.5 pl-3 text-[14.3px] text-faint lg:ml-auto">
           <span className="whitespace-nowrap">{stats.words} words</span>
           {!compact && (
             <button
               onClick={() => setSimpleMode(false)}
-              className="whitespace-nowrap rounded-md border border-line2 px-2 py-1 text-[11px] text-dim transition-colors hover:text-ink"
+              className="whitespace-nowrap rounded-md border border-line2 px-2 py-1 text-[14.3px] text-dim transition-colors hover:text-ink"
             >
               Advanced mode
             </button>
@@ -182,7 +182,7 @@ export function Toolbar({
   }
 
   return (
-    <div className="flex shrink-0 items-stretch gap-0 overflow-x-auto border-b border-line px-1.5 py-1.5">
+    <div className="flex shrink-0 items-stretch justify-between gap-0 overflow-x-auto border-b border-line px-2 py-1.5">
       {/* ---------------- style ---------------- */}
       <Group label="Style">
         <Row>
@@ -195,7 +195,7 @@ export function Toolbar({
                 : editor?.chain().focus().unsetFontFamily().run()
             }
             options={FONTS}
-            width="w-[86px]"
+            width="w-[132px]"
             placeholder="Font"
           />
           <Field
@@ -210,7 +210,7 @@ export function Toolbar({
               { label: "Size", value: "" },
               ...SIZES.map((s) => ({ label: s.replace("px", ""), value: s })),
             ]}
-            width="w-[54px]"
+            width="w-[74px]"
             placeholder="Size"
           />
           <Tool
@@ -220,11 +220,11 @@ export function Toolbar({
               editor?.chain().focus().toggleHeading({ level: 2 }).run()
             }
           >
-            <CaseSensitive size={14} />
+            <CaseSensitive size={18} />
           </Tool>
           <ColorTool
             label="Highlight"
-            icon={<Highlighter size={13} />}
+            icon={<Highlighter size={17} />}
             value={editor?.getAttributes("textStyle").backgroundColor ?? "#1bb4f0"}
             onChange={(c) =>
               editor?.chain().focus().setBackgroundColor(c).run()
@@ -233,7 +233,7 @@ export function Toolbar({
           />
           <ColorTool
             label="Text colour"
-            icon={<Baseline size={13} />}
+            icon={<Baseline size={17} />}
             value={editor?.getAttributes("textStyle").color ?? "#ededed"}
             onChange={(c) => editor?.chain().focus().setColor(c).run()}
             onClear={() => editor?.chain().focus().unsetColor().run()}
@@ -251,7 +251,7 @@ export function Toolbar({
               if (href) editor.chain().focus().setLink({ href }).run();
             }}
           >
-            <Link2 size={13} />
+            <Link2 size={17} />
           </Tool>
         </Row>
         <Row>
@@ -260,28 +260,28 @@ export function Toolbar({
             active={editor?.isActive("bold")}
             onClick={() => editor?.chain().focus().toggleBold().run()}
           >
-            <Bold size={13} />
+            <Bold size={17} />
           </Tool>
           <Tool
             label="Italic"
             active={editor?.isActive("italic")}
             onClick={() => editor?.chain().focus().toggleItalic().run()}
           >
-            <Italic size={13} />
+            <Italic size={17} />
           </Tool>
           <Tool
             label="Underline"
             active={editor?.isActive("underline")}
             onClick={() => editor?.chain().focus().toggleUnderline().run()}
           >
-            <Underline size={13} />
+            <Underline size={17} />
           </Tool>
           <Tool
             label="Strikethrough"
             active={editor?.isActive("strike")}
             onClick={() => editor?.chain().focus().toggleStrike().run()}
           >
-            <Strikethrough size={13} />
+            <Strikethrough size={17} />
           </Tool>
           <Tool
             label="Clear formatting"
@@ -289,21 +289,21 @@ export function Toolbar({
               editor?.chain().focus().unsetAllMarks().clearNodes().run()
             }
           >
-            <Pilcrow size={13} />
+            <Pilcrow size={17} />
           </Tool>
           <Tool
             label="Subscript"
             active={editor?.isActive("subscript")}
             onClick={() => editor?.chain().focus().toggleSubscript().run()}
           >
-            <Subscript size={13} />
+            <Subscript size={17} />
           </Tool>
           <Tool
             label="Superscript"
             active={editor?.isActive("superscript")}
             onClick={() => editor?.chain().focus().toggleSuperscript().run()}
           >
-            <Superscript size={13} />
+            <Superscript size={17} />
           </Tool>
         </Row>
       </Group>
@@ -327,14 +327,14 @@ export function Toolbar({
               active={editor?.isActive({ textAlign: align })}
               onClick={() => editor?.chain().focus().setTextAlign(align).run()}
             >
-              <Icon size={13} />
+              <Icon size={17} />
             </Tool>
           ))}
           <Tool
             label="Horizontal rule"
             onClick={() => editor?.chain().focus().setHorizontalRule().run()}
           >
-            <Minus size={13} />
+            <Minus size={17} />
           </Tool>
         </Row>
         <Row>
@@ -343,21 +343,21 @@ export function Toolbar({
             active={editor?.isActive("bulletList")}
             onClick={() => editor?.chain().focus().toggleBulletList().run()}
           >
-            <List size={13} />
+            <List size={17} />
           </Tool>
           <Tool
             label="Numbered list"
             active={editor?.isActive("orderedList")}
             onClick={() => editor?.chain().focus().toggleOrderedList().run()}
           >
-            <ListOrdered size={13} />
+            <ListOrdered size={17} />
           </Tool>
           <Tool
             label="Quote"
             active={editor?.isActive("blockquote")}
             onClick={() => editor?.chain().focus().toggleBlockquote().run()}
           >
-            <Quote size={13} />
+            <Quote size={17} />
           </Tool>
         </Row>
       </Group>
@@ -373,7 +373,7 @@ export function Toolbar({
           >
             Statistics
             <ChevronDown
-              size={9}
+              size={12}
               className={cx("transition-transform", !statsOpen && "-rotate-90")}
             />
           </button>
@@ -389,7 +389,6 @@ export function Toolbar({
             <Row>
               <Stat label="Characters" value={stats.characters} />
               <Stat label="Paragraphs" value={stats.paragraphs} />
-              <Stat label="Read" value={`${stats.readingMinutes}m`} />
             </Row>
           </>
         ) : (
@@ -413,7 +412,7 @@ export function Toolbar({
                 .sort((a, b) => a.order - b.order)[0];
               if (first) setActiveScene(first.id);
             }}
-            className="h-[19px] w-[112px] rounded border border-line2 bg-void px-1.5 text-[10.5px] text-ink outline-none"
+            className="h-[19px] w-[150px] rounded border border-line2 bg-void px-1.5 text-[13.7px] text-ink outline-none"
           >
             {chapters
               .sort((a, b) => a.order - b.order)
@@ -429,7 +428,7 @@ export function Toolbar({
             aria-label="Scene"
             value={scene?.id ?? ""}
             onChange={(e) => setActiveScene(e.target.value)}
-            className="h-[19px] w-[112px] rounded border border-line2 bg-void px-1.5 text-[10.5px] text-ink outline-none"
+            className="h-[19px] w-[150px] rounded border border-line2 bg-void px-1.5 text-[13.7px] text-ink outline-none"
           >
             {chapterScenes.map((s) => (
               <option key={s.id} value={s.id}>
@@ -450,7 +449,7 @@ export function Toolbar({
             }
           >
             <Bookmark
-              size={12}
+              size={16}
               fill={scene?.status === "final" ? "currentColor" : "none"}
             />
           </Tool>
@@ -463,20 +462,20 @@ export function Toolbar({
       <Group label="Manage" align="center">
         <Row>
           <Tool label="Scene notes and metadata" onClick={onOpenMeta}>
-            <MessageSquarePlus size={13} />
+            <MessageSquarePlus size={17} />
           </Tool>
           <Tool label="Search the manuscript" onClick={onOpenSearch}>
-            <Search size={13} />
+            <Search size={17} />
           </Tool>
           <Tool label="Version history" onClick={onOpenVersions}>
-            <History size={13} />
+            <History size={17} />
           </Tool>
           <Tool label="New scene" onClick={onNewScene}>
-            <FilePlus2 size={13} />
+            <FilePlus2 size={17} />
           </Tool>
         </Row>
         <Row>
-          <span className="pl-0.5 text-[9px] leading-none text-faint">
+          <span className="pl-0.5 text-[11.7px] leading-none text-faint">
             Comment
           </span>
         </Row>
@@ -492,10 +491,10 @@ export function Toolbar({
             active={focusMode}
             onClick={() => setFocusMode(!focusMode)}
           >
-            <Maximize2 size={13} />
+            <Maximize2 size={17} />
           </Tool>
           <Tool label="Chapters and scenes" onClick={onOpenManage}>
-            <BookMarked size={13} />
+            <BookMarked size={17} />
           </Tool>
           <Tool
             label="Copy scene text"
@@ -503,10 +502,17 @@ export function Toolbar({
               if (editor) navigator.clipboard?.writeText(editor.getText());
             }}
           >
-            <Share2 size={13} />
+            <Share2 size={17} />
           </Tool>
+          <span
+            aria-hidden
+            title="You"
+            className="ml-0.5 grid h-[19px] w-[19px] shrink-0 place-items-center rounded-full bg-accent text-[11px] font-semibold text-black"
+          >
+            Y
+          </span>
           <Tool label="Simple mode" onClick={() => setSimpleMode(true)}>
-            <Settings size={13} />
+            <Settings size={17} />
           </Tool>
         </Row>
         <Row>
@@ -534,7 +540,7 @@ function Group({
       {label !== "" && (
         <span
           className={cx(
-            "text-[9px] leading-none text-faint",
+            "text-[11.7px] leading-none text-faint",
             align === "end" ? "text-right" : "text-center",
           )}
         >
@@ -603,7 +609,7 @@ function Field({
       value={value}
       onChange={(e) => onChange(e.target.value)}
       className={cx(
-        "h-[19px] rounded border border-line2 bg-void px-1 text-[10.5px] text-ink outline-none",
+        "h-[19px] rounded border border-line2 bg-void px-1 text-[13.7px] text-ink outline-none",
         width,
       )}
     >
@@ -647,7 +653,7 @@ function ColorTool({
 
 function Stat({ label, value }: { label: string; value: number | string }) {
   return (
-    <span className="whitespace-nowrap pr-2.5 text-[10px] text-dim">
+    <span className="whitespace-nowrap pr-2.5 text-[13px] text-dim">
       {label} : <span className="text-ink">{value}</span>
     </span>
   );

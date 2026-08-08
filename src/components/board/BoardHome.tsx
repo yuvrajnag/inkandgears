@@ -71,7 +71,7 @@ export function BoardHome() {
           <EmptyState />
         </div>
       ) : (
-        <div className="min-h-0 flex-1 overflow-y-auto px-3 pb-8 pt-4 sm:px-5 sm:pt-5">
+        <div className="min-h-0 flex-1 overflow-y-auto px-4 pb-10 pt-5 sm:px-8 lg:px-14">
           {/* ---- collections ---- */}
           {sortedBoards.length > 0 && (
             <div className="mb-7 flex flex-wrap gap-5 sm:mb-9 sm:gap-9">
@@ -79,7 +79,7 @@ export function BoardHome() {
                 const members = entities.filter((e) => e.boardId === b.id);
                 const pics = members.flatMap((e) => e.images);
                 return (
-                  <div key={b.id} className="w-[calc(50%-0.625rem)] max-w-[190px] sm:w-[190px]">
+                  <div key={b.id} className="w-[calc(50%-0.625rem)] max-w-[270px] sm:w-[270px]">
                     <Link
                       href={routes.collection(b.id)}
                       className="block overflow-hidden rounded-xl border border-line transition-all hover:border-line2"
@@ -87,7 +87,7 @@ export function BoardHome() {
                       <Mosaic images={pics.map((p) => p.src)} />
                     </Link>
                     <div className="mt-2 flex items-center justify-between gap-2">
-                      <span className="truncate text-[12.5px] font-semibold">
+                      <span className="truncate text-[16.2px] font-semibold">
                         {b.name}
                       </span>
                       <button
@@ -100,12 +100,12 @@ export function BoardHome() {
                         )}
                       >
                         <Pin
-                          size={12}
+                          size={16}
                           fill={b.pinned ? "currentColor" : "none"}
                         />
                       </button>
                     </div>
-                    <p className="text-[10.5px] text-faint">
+                    <p className="text-[13.7px] text-faint">
                       {pics.length} {pics.length === 1 ? "pic" : "pics"}
                     </p>
                   </div>
@@ -114,36 +114,9 @@ export function BoardHome() {
             </div>
           )}
 
-          {/*
-            Entities created straight from the editor with /c or /p have no
-            picture yet, so they'd be invisible in a gallery. They get a plain
-            list of their own rather than quietly disappearing.
-          */}
-          {noArtwork.length > 0 && (
-            <div className="mb-7">
-              <p className="mb-2 text-[11px] uppercase tracking-wider text-faint">
-                No picture yet
-              </p>
-              <div className="flex flex-wrap gap-1.5">
-                {noArtwork.map((e) => (
-                  <Link
-                    key={e.id}
-                    href={routes.entity(e.id)}
-                    className="rounded-lg border border-line bg-raise/60 px-2.5 py-1.5 text-[12px] text-dim transition-colors hover:border-accent/50 hover:text-ink"
-                  >
-                    {e.name}
-                    <span className="ml-1.5 text-[10px] text-faint">
-                      {ENTITY_KINDS.find((k) => k.kind === e.kind)?.label}
-                    </span>
-                  </Link>
-                ))}
-              </div>
-            </div>
-          )}
-
           {/* ---- saved pictures ---- */}
           <div className="mb-4 flex items-center justify-between">
-            <h2 className="font-display text-[22px] font-bold leading-none sm:text-[27px]">
+            <h2 className="font-display text-[28.6px] font-bold leading-none sm:text-[35.1px]">
               Your saved pic&apos;s
             </h2>
             <div className="relative">
@@ -156,11 +129,11 @@ export function BoardHome() {
                   filtersOpen ? "bg-raise2 text-ink" : "text-dim hover:text-ink",
                 )}
               >
-                <SlidersHorizontal size={17} strokeWidth={1.6} />
+                <SlidersHorizontal size={22} strokeWidth={1.6} />
               </button>
               {filtersOpen && (
                 <div className="absolute right-0 top-9 z-20 w-52 rounded-xl border border-line2 bg-panel p-2 shadow-2xl">
-                  <p className="px-1 pb-1 text-[10.5px] uppercase tracking-wider text-faint">
+                  <p className="px-1 pb-1 text-[13.7px] uppercase tracking-wider text-faint">
                     Sort
                   </p>
                   {(
@@ -174,7 +147,7 @@ export function BoardHome() {
                       key={k}
                       onClick={() => setSort(k)}
                       className={cx(
-                        "block w-full rounded-md px-2 py-1.5 text-left text-[12px]",
+                        "block w-full rounded-md px-2 py-1.5 text-left text-[15.6px]",
                         sort === k
                           ? "bg-accent/10 text-accent"
                           : "text-dim hover:bg-raise2 hover:text-ink",
@@ -184,13 +157,13 @@ export function BoardHome() {
                     </button>
                   ))}
                   <div className="my-1.5 h-px bg-line" />
-                  <p className="px-1 pb-1 text-[10.5px] uppercase tracking-wider text-faint">
+                  <p className="px-1 pb-1 text-[13.7px] uppercase tracking-wider text-faint">
                     Type
                   </p>
                   <button
                     onClick={() => setKindFilter("all")}
                     className={cx(
-                      "block w-full rounded-md px-2 py-1.5 text-left text-[12px]",
+                      "block w-full rounded-md px-2 py-1.5 text-left text-[15.6px]",
                       kindFilter === "all"
                         ? "bg-accent/10 text-accent"
                         : "text-dim hover:bg-raise2 hover:text-ink",
@@ -205,7 +178,7 @@ export function BoardHome() {
                       key={k.kind}
                       onClick={() => setKindFilter(k.kind)}
                       className={cx(
-                        "block w-full rounded-md px-2 py-1.5 text-left text-[12px]",
+                        "block w-full rounded-md px-2 py-1.5 text-left text-[15.6px]",
                         kindFilter === k.kind
                           ? "bg-accent/10 text-accent"
                           : "text-dim hover:bg-raise2 hover:text-ink",
@@ -220,7 +193,7 @@ export function BoardHome() {
           </div>
 
           {shots.length === 0 ? (
-            <p className="py-16 text-center text-[13px] text-faint">
+            <p className="py-16 text-center text-[16.9px] text-faint">
               No images yet. Create an entity and add a reference picture.
             </p>
           ) : (
@@ -238,11 +211,37 @@ export function BoardHome() {
                     loading="lazy"
                     className="w-full"
                   />
-                  <span className="pointer-events-none absolute inset-x-0 bottom-0 translate-y-full bg-gradient-to-t from-black/90 to-transparent px-2.5 pb-2 pt-6 text-[11px] text-ink opacity-0 transition-all group-hover:translate-y-0 group-hover:opacity-100">
+                  <span className="pointer-events-none absolute inset-x-0 bottom-0 translate-y-full bg-gradient-to-t from-black/90 to-transparent px-2.5 pb-2 pt-6 text-[14.3px] text-ink opacity-0 transition-all group-hover:translate-y-0 group-hover:opacity-100">
                     {entity.name}
                   </span>
                 </Link>
               ))}
+            </div>
+          )}
+          {/*
+            Entities created straight from the editor with /c or /p have no
+            picture yet, so they'd be invisible in a gallery. They get a plain
+            list of their own rather than quietly disappearing.
+          */}
+          {noArtwork.length > 0 && (
+            <div className="mb-7">
+              <p className="mb-2 text-[14.3px] uppercase tracking-wider text-faint">
+                No picture yet
+              </p>
+              <div className="flex flex-wrap gap-1.5">
+                {noArtwork.map((e) => (
+                  <Link
+                    key={e.id}
+                    href={routes.entity(e.id)}
+                    className="rounded-lg border border-line bg-raise/60 px-2.5 py-1.5 text-[15.6px] text-dim transition-colors hover:border-accent/50 hover:text-ink"
+                  >
+                    {e.name}
+                    <span className="ml-1.5 text-[13px] text-faint">
+                      {ENTITY_KINDS.find((k) => k.kind === e.kind)?.label}
+                    </span>
+                  </Link>
+                ))}
+              </div>
             </div>
           )}
         </div>
@@ -257,7 +256,7 @@ function Mosaic({ images }: { images: string[] }) {
   if (!a) {
     return (
       <div className="grid aspect-[190/108] place-items-center bg-raise text-faint">
-        <ImageOff size={18} strokeWidth={1.6} />
+        <ImageOff size={23} strokeWidth={1.6} />
       </div>
     );
   }

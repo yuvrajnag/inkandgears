@@ -53,7 +53,7 @@ export function SlashMenu({
       className="fixed z-50 w-[min(280px,calc(100vw-1rem))] overflow-hidden rounded-xl border border-line2 bg-panel shadow-2xl"
     >
       {items.length === 0 ? (
-        <p className="px-3 py-3 text-[12px] text-faint">
+        <p className="px-3 py-3 text-[15.6px] text-faint">
           Nothing matches. Keep typing to name something new.
         </p>
       ) : (
@@ -76,17 +76,17 @@ export function SlashMenu({
             >
               {item.type === "kind" ? (
                 <>
-                  <code className="w-8 shrink-0 font-mono text-[11px] text-accent">
+                  <code className="w-8 shrink-0 font-mono text-[14.3px] text-accent">
                     /{item.slash}
                   </code>
-                  <span className="truncate text-[12.5px]">{item.label}</span>
+                  <span className="truncate text-[16.2px]">{item.label}</span>
                 </>
               ) : item.type === "create" ? (
                 <>
-                  <span className="w-8 shrink-0 text-center text-[13px] text-accent">
+                  <span className="w-8 shrink-0 text-center text-[16.9px] text-accent">
                     +
                   </span>
-                  <span className="truncate text-[12.5px]">
+                  <span className="truncate text-[16.2px]">
                     New {KIND_LABEL.get(item.kind)?.toLowerCase()}{" "}
                     <span className="text-ink">“{item.name}”</span>
                   </span>
@@ -98,10 +98,10 @@ export function SlashMenu({
                     className="ml-1 h-1.5 w-1.5 shrink-0 rounded-full"
                     style={{ background: dot(item.kind) }}
                   />
-                  <span className="ml-1.5 min-w-0 flex-1 truncate text-[12.5px]">
+                  <span className="ml-1.5 min-w-0 flex-1 truncate text-[16.2px]">
                     {item.label}
                   </span>
-                  <span className="shrink-0 text-[10px] text-faint">
+                  <span className="shrink-0 text-[13px] text-faint">
                     {KIND_LABEL.get(item.kind)}
                   </span>
                 </>
@@ -110,7 +110,7 @@ export function SlashMenu({
           ))}
         </div>
       )}
-      <p className="border-t border-line px-3 py-1.5 text-[10px] text-faint">
+      <p className="border-t border-line px-3 py-1.5 text-[13px] text-faint">
         ↑↓ to move · ⏎ to insert · esc to dismiss
       </p>
     </div>,

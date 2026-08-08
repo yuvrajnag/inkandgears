@@ -47,13 +47,13 @@ function BaseNode({ data, id, selected }: Props & { id: string }) {
               setEditing(false);
             }
           }}
-          className="w-full bg-transparent text-[12.5px] font-medium outline-none"
+          className="w-full bg-transparent text-[16.2px] font-medium outline-none"
         />
       ) : (
-        <p className="text-[12.5px] font-medium leading-snug">{data.label}</p>
+        <p className="text-[16.2px] font-medium leading-snug">{data.label}</p>
       )}
       {data.note && (
-        <p className="mt-1 text-[10.5px] leading-snug text-faint">{data.note}</p>
+        <p className="mt-1 text-[13.7px] leading-snug text-faint">{data.note}</p>
       )}
       <Handle type="source" position={Position.Right} />
     </div>

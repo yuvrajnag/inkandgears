@@ -56,12 +56,12 @@ export function CreateFlow() {
         crumbs={[{ label: "All", href: "/flow" }]}
         createLabel="Create"
         onCreate={create}
-        trailing={<Maximize2 size={11} className="text-faint" />}
+        trailing={<Maximize2 size={14} className="text-faint" />}
       />
 
-      <div className="min-h-0 flex-1 overflow-y-auto px-3 pb-10 pt-6 sm:px-5 sm:pt-10">
+      <div className="min-h-0 flex-1 overflow-y-auto px-4 pb-10 pt-6 sm:px-8 sm:pt-10 lg:px-14">
         <div className="mx-auto w-full max-w-[640px]">
-          <label className="mb-1.5 block text-[14px] text-dim" htmlFor="flow-name">
+          <label className="mb-1.5 block text-[18.2px] text-dim" htmlFor="flow-name">
             Flow name
           </label>
           <Input
@@ -74,12 +74,12 @@ export function CreateFlow() {
             aria-invalid={touched && !name.trim()}
           />
           {touched && !name.trim() && (
-            <p className="mt-1.5 text-[11.5px] text-red-300">
+            <p className="mt-1.5 text-[15px] text-red-300">
               Give the flow a name first.
             </p>
           )}
 
-          <p className="mb-3 mt-6 text-[14px] text-dim">
+          <p className="mb-3 mt-6 text-[18.2px] text-dim">
             Select a starting point:
           </p>
 
@@ -110,10 +110,10 @@ export function CreateFlow() {
               <div className="flex items-start gap-2.5">
                 <TemplatesGlyph active={mode === "template"} />
                 <div>
-                  <p className="text-[15px] font-semibold leading-tight">
+                  <p className="text-[19.5px] font-semibold leading-tight">
                     Templates
                   </p>
-                  <p className="text-[11px] text-faint">Use a pre-made flow</p>
+                  <p className="text-[14.3px] text-faint">Use a pre-made flow</p>
                 </div>
               </div>
 
@@ -139,10 +139,10 @@ export function CreateFlow() {
                       )}
                     >
                       <TemplateGlyph id={id} />
-                      <span className="whitespace-nowrap text-[9px] font-medium leading-none tracking-tight">
+                      <span className="whitespace-nowrap text-[11.7px] font-medium leading-none tracking-tight">
                         {t.name}
                       </span>
-                      <span className="text-[7.5px] leading-tight text-faint">
+                      <span className="text-[9.8px] leading-tight text-faint">
                         {t.blurb}
                       </span>
                     </button>
@@ -157,7 +157,7 @@ export function CreateFlow() {
                   e.stopPropagation();
                   setBrowsing((v) => !v);
                 }}
-                className="mt-3 block w-full text-center text-[12.5px] font-medium text-accent hover:text-accent-soft"
+                className="mt-3 block w-full text-center text-[16.2px] font-medium text-accent hover:text-accent-soft"
               >
                 {browsing ? "− Fewer templates" : "+ Browse templates"}
               </button>
@@ -181,8 +181,8 @@ export function CreateFlow() {
                           : "border-line2 hover:border-line2",
                       )}
                     >
-                      <span className="text-[11.5px]">{t.name}</span>
-                      <span className="text-[10px] text-faint">{t.blurb}</span>
+                      <span className="text-[15px]">{t.name}</span>
+                      <span className="text-[13px] text-faint">{t.blurb}</span>
                     </button>
                   ))}
                 </div>
@@ -211,10 +211,10 @@ export function CreateFlow() {
               <div className="flex items-start gap-2.5">
                 <ScratchGlyph active={mode === "scratch"} />
                 <div>
-                  <p className="text-[15px] font-semibold leading-tight">
+                  <p className="text-[19.5px] font-semibold leading-tight">
                     Start from scratch
                   </p>
-                  <p className="text-[11px] text-faint">
+                  <p className="text-[14.3px] text-faint">
                     Build your own node structure
                   </p>
                 </div>
@@ -227,7 +227,7 @@ export function CreateFlow() {
                   backgroundSize: "12px 12px",
                 }}
               >
-                <Plus size={16} className="text-dim" />
+                <Plus size={21} className="text-dim" />
               </div>
             </div>
           </div>
@@ -236,10 +236,10 @@ export function CreateFlow() {
           <button
             onClick={() => setOptionsOpen((v) => !v)}
             aria-expanded={optionsOpen}
-            className="mt-6 flex items-center gap-1.5 text-[12.5px] text-dim transition-colors hover:text-ink"
+            className="mt-6 flex items-center gap-1.5 text-[16.2px] text-dim transition-colors hover:text-ink"
           >
             <ChevronDown
-              size={13}
+              size={17}
               className={cx("transition-transform", optionsOpen && "rotate-180")}
             />
             Optional details
@@ -309,7 +309,7 @@ export function CreateFlow() {
 
           <Button
             size="lg"
-            className="mt-7 w-full text-[16px] font-semibold"
+            className="mt-7 w-full text-[20.8px] font-semibold"
             onClick={create}
           >
             Create

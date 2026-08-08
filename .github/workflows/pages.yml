@@ -47,6 +47,7 @@ jobs:
           STATIC_EXPORT: "1"
           NEXT_PUBLIC_STATIC_EXPORT: "1"
           BASE_PATH: ${{ steps.pages.outputs.base_path }}
+          NEXT_PUBLIC_BASE_PATH: ${{ steps.pages.outputs.base_path }}
         run: |
           npm run build
           touch out/.nojekyll

@@ -134,7 +134,7 @@ export function EntitySheet() {
         createHref="/board/new"
       />
 
-      <div className="min-h-0 flex-1 overflow-y-auto px-3 pb-8 pt-3.5 sm:px-5">
+      <div className="min-h-0 flex-1 overflow-y-auto px-4 pb-10 pt-4 sm:px-8 lg:px-14">
         {/* ---- title row ---- */}
         <div className="mb-4 flex items-center gap-3 sm:gap-4">
           <button
@@ -142,28 +142,28 @@ export function EntitySheet() {
             onClick={() => router.back()}
             className="text-dim transition-colors hover:text-ink"
           >
-            <ArrowLeft size={21} strokeWidth={1.8} />
+            <ArrowLeft size={27} strokeWidth={1.8} />
           </button>
           <input
             value={entity.name}
             onChange={(e) => updateEntity(entity.id, { name: e.target.value })}
             aria-label="Entity name"
-            className="min-w-0 flex-1 bg-transparent font-display text-[21px] font-bold leading-none outline-none focus:text-accent-soft sm:text-[27px]"
+            className="min-w-0 flex-1 bg-transparent font-display text-[27.3px] font-bold leading-none outline-none focus:text-accent-soft sm:text-[35.1px]"
           />
           <button
             aria-label="Entity settings"
             onClick={() => setSettingsOpen(true)}
             className="text-dim transition-colors hover:text-ink"
           >
-            <Settings size={18} strokeWidth={1.6} />
+            <Settings size={23} strokeWidth={1.6} />
           </button>
         </div>
 
-        <div className="grid gap-5 lg:grid-cols-[minmax(0,1.55fr)_minmax(0,1fr)] lg:gap-6">
+        <div className="grid grid-cols-[minmax(0,1fr)] gap-5 lg:grid-cols-[minmax(0,1.55fr)_minmax(0,1fr)] lg:gap-6">
           {/* ---------- left: gallery ---------- */}
-          <div>
+          <div className="min-w-0">
             <div className="relative overflow-hidden rounded-2xl border border-line bg-raise">
-              <div className="aspect-[16/9]">
+              <div className="aspect-[2.12/1]">
                 {current ? (
                   // eslint-disable-next-line @next/next/no-img-element
                   <img
@@ -176,8 +176,8 @@ export function EntitySheet() {
                     onClick={() => fileRef.current?.click()}
                     className="grid h-full w-full place-items-center gap-2 text-faint transition-colors hover:text-dim"
                   >
-                    <ImageOff size={26} strokeWidth={1.4} />
-                    <span className="text-[12px]">Add a reference image</span>
+                    <ImageOff size={34} strokeWidth={1.4} />
+                    <span className="text-[15.6px]">Add a reference image</span>
                   </button>
                 )}
               </div>
@@ -230,7 +230,7 @@ export function EntitySheet() {
                     />
                     {i === entity.coverIndex && (
                       <span className="absolute inset-0 grid place-items-center bg-black/45">
-                        <Check size={14} className="text-accent" />
+                        <Check size={18} className="text-accent" />
                       </span>
                     )}
                   </button>
@@ -242,7 +242,7 @@ export function EntitySheet() {
                     }}
                     className="absolute -right-1.5 -top-1.5 hidden rounded-full bg-void p-0.5 text-faint transition-colors hover:text-red-400 group-hover:block"
                   >
-                    <Trash2 size={11} />
+                    <Trash2 size={14} />
                   </button>
                 </div>
               ))}
@@ -251,7 +251,7 @@ export function EntitySheet() {
                 onClick={() => fileRef.current?.click()}
                 className="grid h-[38px] w-[38px] place-items-center rounded-lg border border-dashed border-line2 text-faint transition-colors hover:border-accent/60 hover:text-accent"
               >
-                <Plus size={15} />
+                <Plus size={20} />
               </button>
               <input
                 ref={fileRef}
@@ -269,7 +269,7 @@ export function EntitySheet() {
             {/* ---- appeared in ---- */}
             <Fieldset legend="Appeared in:" className="mt-5 min-h-[76px]">
               {appearances.length === 0 ? (
-                <p className="pt-1.5 text-[11.5px] text-faint">
+                <p className="pt-1.5 text-[15px] text-faint">
                   Nothing yet. Reference this{" "}
                   {kindLabel.toLowerCase()} with{" "}
                   <code className="font-mono text-dim">
@@ -298,7 +298,7 @@ export function EntitySheet() {
             </Fieldset>
 
             {appearances.length > 0 && (
-              <p className="mt-2 px-1 text-[11px] text-faint">
+              <p className="mt-2 px-1 text-[14.3px] text-faint">
                 First in {appearances[0].title} · last in{" "}
                 {appearances[appearances.length - 1].title} ·{" "}
                 {appearances.length}{" "}
@@ -312,7 +312,7 @@ export function EntitySheet() {
           </div>
 
           {/* ---------- right: fields ---------- */}
-          <div className="space-y-3.5">
+          <div className="min-w-0 space-y-3.5">
             <div>
               <Label>Name</Label>
               <Input
@@ -391,6 +391,24 @@ export function EntitySheet() {
               </div>
             </div>
 
+          </div>
+        </div>
+      </div>
+
+      {detailOpen && (
+        <DetailModal
+          onClose={() => setDetailOpen(false)}
+          kind={entity.kind}
+          onAdd={(d) => {
+            addDetail(entity.id, d);
+            setDetailOpen(false);
+          }}
+        />
+      )}
+
+      {settingsOpen && (
+        <Modal title="Entity settings" onClose={() => setSettingsOpen(false)}>
+          <div className="space-y-4 text-[16.9px]">
             <div>
               <Label>Relationships</Label>
               <div className="min-h-[64px] rounded-[10px] border border-line2 bg-raise p-2.5">
@@ -415,24 +433,6 @@ export function EntitySheet() {
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-
-      {detailOpen && (
-        <DetailModal
-          onClose={() => setDetailOpen(false)}
-          kind={entity.kind}
-          onAdd={(d) => {
-            addDetail(entity.id, d);
-            setDetailOpen(false);
-          }}
-        />
-      )}
-
-      {settingsOpen && (
-        <Modal title="Entity settings" onClose={() => setSettingsOpen(false)}>
-          <div className="space-y-4 text-[13px]">
             <div>
               <Label>Notes</Label>
               <Textarea
@@ -444,7 +444,7 @@ export function EntitySheet() {
                 placeholder="Anything that shouldn't show on the sheet."
               />
             </div>
-            <dl className="grid grid-cols-2 gap-2 text-[12px] text-dim">
+            <dl className="grid grid-cols-2 gap-2 text-[15.6px] text-dim">
               <div>
                 <dt className="text-faint">Created</dt>
                 <dd>{new Date(entity.createdAt).toLocaleString()}</dd>
@@ -469,7 +469,7 @@ export function EntitySheet() {
                   }
                 }}
               >
-                <Trash2 size={13} /> Delete entity
+                <Trash2 size={17} /> Delete entity
               </Button>
             </div>
           </div>
@@ -497,7 +497,7 @@ function CarouselBtn({
         side === "left" ? "left-3" : "right-3",
       )}
     >
-      <Icon size={22} strokeWidth={2} />
+      <Icon size={29} strokeWidth={2} />
     </button>
   );
 }
@@ -513,7 +513,7 @@ function DetailChip({
   if (detail.type === "color" && HEX.test(detail.value)) {
     return (
       <span
-        className="inline-flex items-center gap-1 rounded-[5px] px-2 py-[3px] text-[10.5px] font-medium text-black/85"
+        className="inline-flex items-center gap-1 rounded-[5px] px-2 py-[3px] text-[13.7px] font-medium text-black/85"
         style={{ background: detail.value }}
       >
         {detail.value.toUpperCase()}
@@ -592,7 +592,7 @@ function DetailModal({
                   key={s}
                   onClick={() => setLabel(s)}
                   className={cx(
-                    "rounded-md border px-2 py-1 text-[11.5px] transition-colors",
+                    "rounded-md border px-2 py-1 text-[15px] transition-colors",
                     label === s
                       ? "border-accent/60 bg-accent/10 text-accent"
                       : "border-line2 text-dim hover:text-ink",
@@ -729,7 +729,7 @@ function RelationshipAdder({
       <Select
         value={kind}
         onChange={(e) => setKind(e.target.value as (typeof REL_KINDS)[number])}
-        className="h-8 w-[130px] text-[11.5px]"
+        className="h-8 w-[130px] text-[15px]"
       >
         {REL_KINDS.map((k) => (
           <option key={k} value={k}>
@@ -740,7 +740,7 @@ function RelationshipAdder({
       <Select
         value={toId}
         onChange={(e) => setToId(e.target.value)}
-        className="h-8 min-w-[130px] flex-1 text-[11.5px]"
+        className="h-8 min-w-[130px] flex-1 text-[15px]"
       >
         <option value="">Choose…</option>
         {options.map((e) => (

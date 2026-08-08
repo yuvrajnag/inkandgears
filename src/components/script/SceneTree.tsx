@@ -60,13 +60,13 @@ export function SceneTree({ onClose }: { onClose: () => void }) {
       )}
     >
       <div className="flex items-center justify-between border-b border-line px-3 py-2">
-        <h2 className="text-[12px] font-medium">Manuscript</h2>
+        <h2 className="text-[15.6px] font-medium">Manuscript</h2>
         <button
           aria-label="Close manuscript panel"
           onClick={onClose}
           className="rounded p-0.5 text-dim transition-colors hover:text-ink"
         >
-          <X size={13} />
+          <X size={17} />
         </button>
       </div>
 
@@ -75,7 +75,7 @@ export function SceneTree({ onClose }: { onClose: () => void }) {
           .sort((a, b) => a.order - b.order)
           .map((vol) => (
             <div key={vol.id} className="mb-1.5">
-              <p className="px-2 py-1 text-[10px] uppercase tracking-wider text-faint">
+              <p className="px-2 py-1 text-[13px] uppercase tracking-wider text-faint">
                 {vol.title}
               </p>
 
@@ -96,23 +96,23 @@ export function SceneTree({ onClose }: { onClose: () => void }) {
                           className="text-faint transition-colors hover:text-ink"
                         >
                           {open ? (
-                            <ChevronDown size={12} />
+                            <ChevronDown size={16} />
                           ) : (
-                            <ChevronRight size={12} />
+                            <ChevronRight size={16} />
                           )}
                         </button>
                         <input
                           value={ch.title}
                           onChange={(e) => renameChapter(ch.id, e.target.value)}
                           aria-label="Chapter title"
-                          className="min-w-0 flex-1 bg-transparent text-[12px] outline-none focus:text-accent-soft"
+                          className="min-w-0 flex-1 bg-transparent text-[15.6px] outline-none focus:text-accent-soft"
                         />
                         <button
                           aria-label={`Add scene to ${ch.title}`}
                           onClick={() => addScene(ch.id)}
                           className="hidden text-faint transition-colors hover:text-ink group-hover:block"
                         >
-                          <Plus size={12} />
+                          <Plus size={16} />
                         </button>
                         <button
                           aria-label={`Delete ${ch.title}`}
@@ -126,7 +126,7 @@ export function SceneTree({ onClose }: { onClose: () => void }) {
                           }}
                           className="hidden text-faint transition-colors hover:text-red-400 group-hover:block"
                         >
-                          <Trash2 size={11} />
+                          <Trash2 size={14} />
                         </button>
                       </div>
 
@@ -149,7 +149,7 @@ export function SceneTree({ onClose }: { onClose: () => void }) {
                             <button
                               onClick={() => setActiveScene(sc.id)}
                               className={cx(
-                                "min-w-0 flex-1 truncate text-left text-[11.5px]",
+                                "min-w-0 flex-1 truncate text-left text-[15px]",
                                 sc.id === activeSceneId
                                   ? "text-accent"
                                   : "text-dim",
@@ -157,7 +157,7 @@ export function SceneTree({ onClose }: { onClose: () => void }) {
                             >
                               {sc.title}
                             </button>
-                            <span className="shrink-0 text-[9.5px] text-faint group-hover:hidden">
+                            <span className="shrink-0 text-[12.3px] text-faint group-hover:hidden">
                               {sc.words}
                             </span>
                             <span className="hidden shrink-0 items-center gap-0.5 group-hover:flex">
@@ -165,19 +165,19 @@ export function SceneTree({ onClose }: { onClose: () => void }) {
                                 label="Move up"
                                 onClick={() => moveScene(sc.id, -1)}
                               >
-                                <ArrowUp size={10} />
+                                <ArrowUp size={13} />
                               </IconMini>
                               <IconMini
                                 label="Move down"
                                 onClick={() => moveScene(sc.id, 1)}
                               >
-                                <ArrowDown size={10} />
+                                <ArrowDown size={13} />
                               </IconMini>
                               <IconMini
                                 label="Duplicate scene"
                                 onClick={() => duplicateScene(sc.id)}
                               >
-                                <Copy size={10} />
+                                <Copy size={13} />
                               </IconMini>
                               <IconMini
                                 label="Delete scene"
@@ -187,7 +187,7 @@ export function SceneTree({ onClose }: { onClose: () => void }) {
                                     removeScene(sc.id);
                                 }}
                               >
-                                <Trash2 size={10} />
+                                <Trash2 size={13} />
                               </IconMini>
                             </span>
                           </div>
@@ -198,9 +198,9 @@ export function SceneTree({ onClose }: { onClose: () => void }) {
 
               <button
                 onClick={() => addChapter(vol.id)}
-                className="ml-1 mt-0.5 flex items-center gap-1 rounded px-1.5 py-1 text-[11px] text-faint transition-colors hover:text-ink"
+                className="ml-1 mt-0.5 flex items-center gap-1 rounded px-1.5 py-1 text-[14.3px] text-faint transition-colors hover:text-ink"
               >
-                <Plus size={11} /> Chapter
+                <Plus size={14} /> Chapter
               </button>
             </div>
           ))}
@@ -208,9 +208,9 @@ export function SceneTree({ onClose }: { onClose: () => void }) {
 
       <button
         onClick={() => addVolume(`Volume ${volumes.length + 1}`)}
-        className="flex items-center gap-1 border-t border-line px-3 py-2 text-[11px] text-faint transition-colors hover:text-ink"
+        className="flex items-center gap-1 border-t border-line px-3 py-2 text-[14.3px] text-faint transition-colors hover:text-ink"
       >
-        <Plus size={11} /> Volume
+        <Plus size={14} /> Volume
       </button>
     </aside>
   );
