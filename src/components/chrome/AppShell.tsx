@@ -182,7 +182,7 @@ export function AppShell({ children }: { children: ReactNode }) {
 
         {/* ---- content panel ---- */}
         <main className="min-h-0 flex-1 px-2 pb-2 pt-1.5">
-          <div className="relative h-full overflow-hidden rounded-2xl border border-line bg-panel">
+          <div className="relative h-full overflow-hidden rounded-[18px] border-2 border-line bg-panel">
             {children}
           </div>
         </main>

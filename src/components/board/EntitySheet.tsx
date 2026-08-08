@@ -162,7 +162,7 @@ export function EntitySheet() {
         <div className="grid grid-cols-[minmax(0,1fr)] gap-5 lg:grid-cols-[minmax(0,1.55fr)_minmax(0,1fr)] lg:gap-6">
           {/* ---------- left: gallery ---------- */}
           <div className="min-w-0">
-            <div className="relative overflow-hidden rounded-2xl border border-line bg-raise">
+            <div className="relative overflow-hidden rounded-[18px] border-2 border-line bg-raise2">
               <div className="aspect-[2.12/1]">
                 {current ? (
                   // eslint-disable-next-line @next/next/no-img-element

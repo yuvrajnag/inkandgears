@@ -163,7 +163,7 @@ export function DraftCanvas() {
 
         {/* The reference frames the page itself inside the module panel. */}
         <div className="relative min-h-0 flex-1 p-2 sm:p-2.5">
-          <div className="h-full overflow-y-auto rounded-xl border border-line bg-void">
+          <div className="h-full overflow-y-auto rounded-[24px] border-2 border-line bg-raise">
             <div
               className={cx(
                 // Left-aligned measure — the writing starts where the page
