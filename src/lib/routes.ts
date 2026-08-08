@@ -16,6 +16,8 @@ export const routes = {
   collection: (id: string) => `/board/collection?id=${encodeURIComponent(id)}`,
   entity: (id: string) => `/board/entity?id=${encodeURIComponent(id)}`,
 
+  game: "/game",
+
   flow: "/flow",
   newFlow: "/flow/new",
   flowView: (id: string) => `/flow/view?id=${encodeURIComponent(id)}`,

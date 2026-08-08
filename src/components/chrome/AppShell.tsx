@@ -59,6 +59,7 @@ const TABS = [
   { href: "/script", label: "Script" },
   { href: "/board", label: "Board" },
   { href: "/flow", label: "Flow" },
+  { href: "/game", label: "Game" },
 ];
 
 export function AppShell({ children }: { children: ReactNode }) {

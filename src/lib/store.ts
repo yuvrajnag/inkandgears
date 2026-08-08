@@ -4,6 +4,8 @@ import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 import { nanoid } from "nanoid";
 import { buildSeed } from "./seed";
+import { buildGameSeed } from "./game/seed";
+import type { GameNarrative } from "./game/types";
 import type {
   Appearance,
   Board,
@@ -36,6 +38,8 @@ export type Draft = {
   simpleMode: boolean;
   focusMode: boolean;
   lastSavedAt: number | null;
+  /** Phase 2 — Game Narrative Studio */
+  narrative: GameNarrative;
 };
 
 type Actions = {
@@ -96,6 +100,9 @@ type Actions = {
   setProjectName: (v: string) => void;
   resetProject: () => void;
   importProject: (data: Partial<Draft>) => void;
+
+  // Game Narrative Studio
+  updateNarrative: (patch: Partial<GameNarrative>) => void;
 };
 
 export type Store = Draft & Actions;
@@ -116,6 +123,7 @@ function initial(): Draft {
     simpleMode: false,
     focusMode: false,
     lastSavedAt: null,
+    narrative: buildGameSeed(),
   };
 }
 
@@ -456,13 +464,23 @@ export const useStore = create<Store>()(
       setSimpleMode: (v) => set({ simpleMode: v }),
       setFocusMode: (v) => set({ focusMode: v }),
       setProjectName: (v) => set({ projectName: v }),
+      updateNarrative: (patch) =>
+        set((s) => ({ narrative: { ...s.narrative, ...patch } })),
       resetProject: () => set({ ...initial() }),
       importProject: (data) => set((s) => ({ ...s, ...data })),
     }),
     {
       name: "inkandgears.project.v1",
-      version: 1,
+      version: 2,
       storage: createJSONStorage(() => localStorage),
+      // Saves made before the Game Studio existed have no narrative slice.
+      migrate: (persisted, from) => {
+        const state = persisted as Partial<Draft>;
+        if (from < 2 || !state?.narrative) {
+          return { ...state, narrative: buildGameSeed() } as Draft;
+        }
+        return state as Draft;
+      },
       partialize: (s): Draft => ({
         boards: s.boards,
         entities: s.entities,
@@ -477,6 +495,7 @@ export const useStore = create<Store>()(
         simpleMode: s.simpleMode,
         focusMode: s.focusMode,
         lastSavedAt: s.lastSavedAt,
+        narrative: s.narrative,
       }),
     },
   ),
