@@ -6,24 +6,26 @@
 */
 
 :root {
+/* Values below are lifted from the Figma file, not eyeballed. */
   --ink-void: #000000;
-  --ink-panel: #070707;
-  --ink-raise: #0d0d0d;
-  --ink-raise-2: #141414;
-  --ink-line: #1c1c1c;
-  --ink-line-2: #2a2a2a;
+  --ink-panel: #000000;
+  --ink-raise: #0f0f0f;
+  --ink-raise-2: #121212;
+  --ink-line: #181818;
+  --ink-line-2: #181818;
 
-  --ink-text: #ededed;
-  --ink-dim: #8b8b8b;
-  --ink-faint: #5a5a5a;
+  --ink-text: #ffffff;
+  --ink-dim: #969696;
+  --ink-faint: #747474;
+  --ink-faintest: #616161;
 
-  --ink-accent: #1bb4f0;
-  --ink-accent-soft: #7ad4fa;
+  --ink-accent: #00bfff;
+  --ink-accent-soft: #7ad9ff;
   --ink-accent-deep: #0a8dc4;
 
   --font-sans-stack: var(--font-geist-sans), ui-sans-serif, system-ui,
     "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  --font-display-stack: var(--font-baloo), var(--font-geist-sans), ui-rounded,
+  --font-display-stack: var(--font-orbitron), var(--font-geist-sans),
     "Segoe UI", system-ui, sans-serif;
   --font-script-stack: var(--font-caveat), "Segoe Script", cursive;
   --font-mono-stack: var(--font-geist-mono), ui-monospace, SFMono-Regular,
@@ -40,6 +42,7 @@
   --color-ink: var(--ink-text);
   --color-dim: var(--ink-dim);
   --color-faint: var(--ink-faint);
+  --color-faintest: var(--ink-faintest);
   --color-accent: var(--ink-accent);
   --color-accent-soft: var(--ink-accent-soft);
   --color-accent-deep: var(--ink-accent-deep);

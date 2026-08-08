@@ -48,13 +48,15 @@ export const Button = forwardRef<HTMLButtonElement, BtnProps>(function Button(
 /* ---------------- fields ---------------- */
 
 const fieldBase =
-  "ig-field w-full rounded-[10px] border border-line2 bg-raise px-3 text-[16.9px] text-ink outline-none transition-all placeholder:text-faint";
+  "ig-field w-full rounded-[10px] border-2 border-line2 bg-black px-3.5 text-[16px] font-bold text-ink outline-none transition-all placeholder:font-normal placeholder:text-faint sm:text-[21px]";
 
 export const Input = forwardRef<
   HTMLInputElement,
   InputHTMLAttributes<HTMLInputElement>
 >(function Input({ className, ...rest }, ref) {
-  return <input ref={ref} className={cx(fieldBase, "h-10", className)} {...rest} />;
+  return (
+    <input ref={ref} className={cx(fieldBase, "h-[53px]", className)} {...rest} />
+  );
 });
 
 export const Textarea = forwardRef<
@@ -64,7 +66,11 @@ export const Textarea = forwardRef<
   return (
     <textarea
       ref={ref}
-      className={cx(fieldBase, "resize-y py-2.5 leading-relaxed", className)}
+      className={cx(
+        fieldBase,
+        "resize-y py-2.5 text-[15px] leading-relaxed sm:text-[17.7px]",
+        className,
+      )}
       {...rest}
     />
   );
@@ -101,7 +107,9 @@ export const Select = forwardRef<
 
 export function Label({ children }: { children: ReactNode }) {
   return (
-    <span className="mb-1.5 block text-[16.2px] text-dim">{children}</span>
+    <span className="mb-1.5 block text-[16px] text-faint sm:text-[21px]">
+      {children}
+    </span>
   );
 }
 
@@ -171,7 +179,7 @@ export function Fieldset({
         className,
       )}
     >
-      <legend className="px-1.5 text-[15.6px] text-dim">{legend}</legend>
+      <legend className="px-1.5 text-[16px] text-faint sm:text-[21px]">{legend}</legend>
       {children}
     </fieldset>
   );

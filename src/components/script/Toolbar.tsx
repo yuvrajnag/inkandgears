@@ -475,7 +475,7 @@ export function Toolbar({
           </Tool>
         </Row>
         <Row>
-          <span className="pl-0.5 text-[11.7px] leading-none text-faint">
+          <span className="pl-0.5 text-[8.8px] leading-none text-ink">
             Comment
           </span>
         </Row>
@@ -540,7 +540,7 @@ function Group({
       {label !== "" && (
         <span
           className={cx(
-            "text-[11.7px] leading-none text-faint",
+            "font-display text-[15.9px] font-extrabold leading-none text-line2",
             align === "end" ? "text-right" : "text-center",
           )}
         >

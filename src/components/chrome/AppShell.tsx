@@ -145,7 +145,7 @@ export function AppShell({ children }: { children: ReactNode }) {
 
             <button
               onClick={() => setHelpOpen(true)}
-              className="text-[16.9px] text-ink/90 transition-colors hover:text-accent"
+              className="font-display text-[15px] font-extrabold text-ink transition-colors hover:text-accent sm:text-[17.7px]"
             >
               Help
             </button>
@@ -164,10 +164,11 @@ export function AppShell({ children }: { children: ReactNode }) {
                   href={t.href}
                   aria-current={active ? "page" : undefined}
                   className={[
-                    "pb-0.5 text-[17.6px] transition-colors",
+                    "pb-0.5 font-display font-extrabold transition-colors",
+                    "text-[15px] sm:text-[17.7px]",
                     active
                       ? "text-ink underline decoration-1 underline-offset-4"
-                      : "text-ink/85 hover:text-ink",
+                      : "text-ink hover:text-accent",
                   ].join(" ")}
                 >
                   {t.label}

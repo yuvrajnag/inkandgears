@@ -148,7 +148,7 @@ export function EntitySheet() {
             value={entity.name}
             onChange={(e) => updateEntity(entity.id, { name: e.target.value })}
             aria-label="Entity name"
-            className="min-w-0 flex-1 bg-transparent font-display text-[27.3px] font-bold leading-none outline-none focus:text-accent-soft sm:text-[35.1px]"
+            className="min-w-0 flex-1 bg-transparent font-display text-[22px] font-extrabold leading-none outline-none focus:text-accent-soft sm:text-[31.8px]"
           />
           <button
             aria-label="Entity settings"
@@ -216,17 +216,17 @@ export function EntitySheet() {
                     }}
                     aria-label={`Reference ${i + 1}${i === entity.coverIndex ? " (cover)" : ""}`}
                     className={cx(
-                      "relative h-[38px] w-[38px] overflow-hidden rounded-lg border-2 transition-all",
+                      "relative grid place-items-center overflow-hidden rounded-[10px] transition-all",
                       i === slide
-                        ? "border-accent"
-                        : "border-transparent opacity-70 hover:opacity-100",
+                        ? "h-[36px] w-[36px] bg-white p-[2px]"
+                        : "h-[33px] w-[33px] bg-line p-[2px] opacity-80 hover:opacity-100",
                     )}
                   >
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src={img.src}
                       alt=""
-                      className="h-full w-full object-cover"
+                      className="h-full w-full rounded-[8px] object-cover"
                     />
                     {i === entity.coverIndex && (
                       <span className="absolute inset-0 grid place-items-center bg-black/45">
@@ -249,7 +249,7 @@ export function EntitySheet() {
               <button
                 aria-label="Add reference image"
                 onClick={() => fileRef.current?.click()}
-                className="grid h-[38px] w-[38px] place-items-center rounded-lg border border-dashed border-line2 text-faint transition-colors hover:border-accent/60 hover:text-accent"
+                className="grid h-[33px] w-[33px] place-items-center rounded-[10px] border-2 border-dashed border-line2 text-faint transition-colors hover:border-accent/60 hover:text-accent"
               >
                 <Plus size={20} />
               </button>

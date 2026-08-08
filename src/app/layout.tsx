@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono, Baloo_2, Caveat } from "next/font/google";
+import { Geist, Geist_Mono, Orbitron, Caveat } from "next/font/google";
 import "./globals.css";
 import { AppShell } from "@/components/chrome/AppShell";
 
@@ -13,10 +13,16 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const baloo = Baloo_2({
-  variable: "--font-baloo",
+/*
+ * Orbitron is the mark's face — the Figma file sets every piece of chrome and
+ * every heading in Orbitron ExtraBold. Body copy and field labels are
+ * Sansation there, which isn't distributable through next/font; Geist stands
+ * in for it until the real file is licensed and self-hosted.
+ */
+const orbitron = Orbitron({
+  variable: "--font-orbitron",
   subsets: ["latin"],
-  weight: ["600", "700", "800"],
+  weight: ["400", "500", "700", "800", "900"],
 });
 
 const caveat = Caveat({
@@ -40,7 +46,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${baloo.variable} ${caveat.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${orbitron.variable} ${caveat.variable} h-full antialiased`}
     >
       <body className="min-h-full bg-void text-ink">
         <AppShell>{children}</AppShell>
