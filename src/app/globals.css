@@ -1,0 +1,347 @@
+@import "tailwindcss";
+
+/*
+  INK & GEARS — dark-first, cinematic, minimal.
+  Everything sits on true black; panels lift by a few percent only.
+*/
+
+:root {
+  --ink-void: #000000;
+  --ink-panel: #070707;
+  --ink-raise: #0d0d0d;
+  --ink-raise-2: #141414;
+  --ink-line: #1c1c1c;
+  --ink-line-2: #2a2a2a;
+
+  --ink-text: #ededed;
+  --ink-dim: #8b8b8b;
+  --ink-faint: #5a5a5a;
+
+  --ink-accent: #1bb4f0;
+  --ink-accent-soft: #7ad4fa;
+  --ink-accent-deep: #0a8dc4;
+
+  --font-sans-stack: var(--font-geist-sans), ui-sans-serif, system-ui,
+    "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-display-stack: var(--font-baloo), var(--font-geist-sans), ui-rounded,
+    "Segoe UI", system-ui, sans-serif;
+  --font-script-stack: var(--font-caveat), "Segoe Script", cursive;
+  --font-mono-stack: var(--font-geist-mono), ui-monospace, SFMono-Regular,
+    Menlo, monospace;
+}
+
+@theme inline {
+  --color-void: var(--ink-void);
+  --color-panel: var(--ink-panel);
+  --color-raise: var(--ink-raise);
+  --color-raise2: var(--ink-raise-2);
+  --color-line: var(--ink-line);
+  --color-line2: var(--ink-line-2);
+  --color-ink: var(--ink-text);
+  --color-dim: var(--ink-dim);
+  --color-faint: var(--ink-faint);
+  --color-accent: var(--ink-accent);
+  --color-accent-soft: var(--ink-accent-soft);
+  --color-accent-deep: var(--ink-accent-deep);
+
+  --font-sans: var(--font-sans-stack);
+  --font-display: var(--font-display-stack);
+  --font-script: var(--font-script-stack);
+  --font-mono: var(--font-mono-stack);
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background: var(--ink-void);
+  color: var(--ink-text);
+  font-family: var(--font-sans-stack);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--ink-accent) 35%, transparent);
+  color: #fff;
+}
+
+/* Scrollbars stay out of the way — this is a writing tool. */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #2a2a2a transparent;
+}
+*::-webkit-scrollbar {
+  width: 9px;
+  height: 9px;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+*::-webkit-scrollbar-thumb {
+  background: #242424;
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: #333;
+  background-clip: content-box;
+}
+
+@utility field {
+  background: var(--ink-raise);
+  border: 1px solid var(--ink-line-2);
+  border-radius: 10px;
+  color: var(--ink-text);
+  outline: none;
+  transition:
+    border-color 140ms ease,
+    box-shadow 140ms ease;
+}
+@utility field-focus {
+  border-color: color-mix(in srgb, var(--ink-accent) 55%, transparent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ink-accent) 12%, transparent);
+}
+
+input.ig-field:focus,
+textarea.ig-field:focus,
+select.ig-field:focus {
+  border-color: color-mix(in srgb, var(--ink-accent) 55%, transparent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ink-accent) 12%, transparent);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--ink-faint);
+}
+
+/* Reduced motion is a first-class accessibility requirement here. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* ---------- Tiptap / Draft Canvas ---------- */
+
+.ig-prose {
+  color: var(--ink-text);
+  font-size: 16px;
+  line-height: 1.75;
+  caret-color: var(--ink-accent);
+}
+.ig-prose:focus {
+  outline: none;
+}
+.ig-prose p {
+  margin: 0 0 0.9em;
+}
+.ig-prose h1 {
+  font-size: 2em;
+  font-weight: 700;
+  margin: 1.1em 0 0.5em;
+  letter-spacing: -0.02em;
+}
+.ig-prose h2 {
+  font-size: 1.5em;
+  font-weight: 700;
+  margin: 1em 0 0.45em;
+  letter-spacing: -0.015em;
+}
+.ig-prose h3 {
+  font-size: 1.2em;
+  font-weight: 600;
+  margin: 0.9em 0 0.4em;
+}
+.ig-prose ul,
+.ig-prose ol {
+  padding-left: 1.4em;
+  margin: 0 0 0.9em;
+}
+.ig-prose ul {
+  list-style: disc;
+}
+.ig-prose ol {
+  list-style: decimal;
+}
+.ig-prose li {
+  margin: 0.2em 0;
+}
+.ig-prose blockquote {
+  border-left: 2px solid var(--ink-line-2);
+  padding-left: 1em;
+  color: var(--ink-dim);
+  margin: 0 0 0.9em;
+}
+.ig-prose a {
+  color: var(--ink-accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.ig-prose code {
+  font-family: var(--font-mono-stack);
+  font-size: 0.9em;
+  background: var(--ink-raise-2);
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+}
+.ig-prose pre {
+  background: var(--ink-raise);
+  border: 1px solid var(--ink-line);
+  border-radius: 10px;
+  padding: 0.9em 1em;
+  margin: 0 0 0.9em;
+  overflow-x: auto;
+}
+.ig-prose pre code {
+  background: none;
+  padding: 0;
+}
+.ig-prose hr {
+  border: none;
+  border-top: 1px solid var(--ink-line);
+  margin: 1.6em 0;
+}
+
+.ig-prose p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  color: var(--ink-faint);
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
+
+/* Entity references keep the prose clean — a tint, not a badge. */
+.ig-entity {
+  color: var(--ink-accent-soft);
+  background: color-mix(in srgb, var(--ink-accent) 12%, transparent);
+  border-radius: 5px;
+  padding: 0.05em 0.3em;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 120ms ease;
+}
+.ig-entity:hover {
+  background: color-mix(in srgb, var(--ink-accent) 22%, transparent);
+}
+.ig-entity[data-kind="character"] {
+  color: #b7e3ff;
+}
+.ig-entity[data-kind="location"] {
+  color: #9fe6c8;
+  background: color-mix(in srgb, #35d39a 12%, transparent);
+}
+.ig-entity[data-kind="faction"] {
+  color: #f0c2ff;
+  background: color-mix(in srgb, #c479ea 12%, transparent);
+}
+.ig-entity[data-kind="item"] {
+  color: #ffd9a8;
+  background: color-mix(in srgb, #e8a24d 12%, transparent);
+}
+.ig-entity[data-kind="event"] {
+  color: #ffb3b3;
+  background: color-mix(in srgb, #e86b6b 12%, transparent);
+}
+.ig-entity[data-kind="creature"],
+.ig-entity[data-kind="vehicle"],
+.ig-entity[data-kind="scene"] {
+  color: #d5d5d5;
+  background: #ffffff14;
+}
+
+.ig-focus .ig-prose > *:not(.has-focus) {
+  opacity: 0.32;
+  transition: opacity 200ms ease;
+}
+
+/* ---------- React Flow ---------- */
+
+.react-flow__attribution {
+  display: none;
+}
+.react-flow__background {
+  background: var(--ink-void);
+}
+.react-flow .react-flow__handle {
+  width: 8px;
+  height: 8px;
+  background: var(--ink-raise-2);
+  border: 1px solid var(--ink-line-2);
+}
+.react-flow .react-flow__handle:hover {
+  background: var(--ink-accent);
+  border-color: var(--ink-accent);
+}
+.react-flow .react-flow__edge-path {
+  stroke: #3a3a3a;
+  stroke-width: 1.5;
+}
+.react-flow .react-flow__edge.selected .react-flow__edge-path,
+.react-flow .react-flow__edge:hover .react-flow__edge-path {
+  stroke: var(--ink-accent);
+}
+.react-flow__edge-text {
+  fill: var(--ink-dim);
+  font-size: 10px;
+}
+.react-flow__edge-textbg {
+  fill: var(--ink-void);
+}
+.react-flow .react-flow__controls {
+  border: 1px solid var(--ink-line);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px -12px #000;
+}
+.react-flow .react-flow__controls-button {
+  width: 26px;
+  height: 26px;
+  background: var(--ink-raise);
+  border: none;
+  border-bottom: 1px solid var(--ink-line);
+  fill: var(--ink-dim);
+}
+.react-flow .react-flow__controls-button:last-child {
+  border-bottom: none;
+}
+.react-flow .react-flow__controls-button svg {
+  width: 11px;
+  height: 11px;
+  max-width: 11px;
+  max-height: 11px;
+}
+.react-flow .react-flow__controls-button:hover {
+  background: var(--ink-raise-2);
+  fill: var(--ink-text);
+}
+.react-flow .react-flow__minimap {
+  border: 1px solid var(--ink-line);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.react-flow__node.selected .ig-node {
+  border-color: var(--ink-accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ink-accent) 15%, transparent);
+}
+.react-flow__nodesselection-rect,
+.react-flow__selection {
+  background: color-mix(in srgb, var(--ink-accent) 8%, transparent);
+  border: 1px solid var(--ink-accent);
+}
+
+/* ---------- Masonry gallery ---------- */
+
+.ig-masonry {
+  column-gap: 14px;
+}
+.ig-masonry > * {
+  break-inside: avoid;
+  margin-bottom: 14px;
+}
