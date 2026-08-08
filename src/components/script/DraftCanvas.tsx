@@ -159,16 +159,14 @@ export function DraftCanvas() {
       />
 
       <div className="flex min-h-0 flex-1">
-        {treeOpen && !simpleMode && (
-          <SceneTree onClose={() => setTreeOpen(false)} />
-        )}
+        {treeOpen && <SceneTree onClose={() => setTreeOpen(false)} />}
 
         <div className="relative min-h-0 flex-1 overflow-y-auto">
           <div
             className={cx(
               // Left-aligned measure, not centred — the writing starts where
               // the panel starts, the way the reference sets it.
-              "w-full pb-32 pl-8 pr-8 pt-8",
+              "w-full px-4 pb-32 pt-6 sm:px-8 sm:pt-8",
               simpleMode ? "mx-auto max-w-[720px]" : "max-w-[900px]",
               focusMode && "ig-focus",
             )}
@@ -180,7 +178,7 @@ export function DraftCanvas() {
                   updateScene(scene.id, { title: e.target.value })
                 }
                 aria-label="Scene title"
-                className="mb-5 w-full bg-transparent font-display text-[24px] font-bold outline-none placeholder:text-faint focus:text-accent-soft"
+                className="mb-5 w-full bg-transparent font-display text-[20px] font-bold outline-none placeholder:text-faint focus:text-accent-soft sm:text-[24px]"
                 placeholder="Untitled scene"
               />
             )}

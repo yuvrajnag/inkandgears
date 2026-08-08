@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useMemo, useRef, useState } from "react";
 import {
   ArrowLeft,
@@ -30,12 +30,14 @@ import {
 } from "@/components/ui/primitives";
 import { ENTITY_KINDS, type Detail, type FieldType } from "@/lib/types";
 import { readImageFile } from "@/lib/upload";
+import { routes } from "@/lib/routes";
 
 const HEX = /^#([0-9a-f]{3}|[0-9a-f]{6})$/i;
 
-export function EntitySheet({ entityId }: { entityId: string }) {
+export function EntitySheet() {
   const hydrated = useHydrated();
   const router = useRouter();
+  const entityId = useSearchParams().get("id") ?? "";
 
   const entity = useStore((s) => s.entities.find((e) => e.id === entityId));
   const boards = useStore((s) => s.boards);
@@ -125,16 +127,16 @@ export function EntitySheet({ entityId }: { entityId: string }) {
         crumbs={[
           { label: "All", href: "/board" },
           board
-            ? { label: board.name.toLowerCase(), href: `/board/c/${board.id}` }
+            ? { label: board.name.toLowerCase(), href: routes.collection(board.id) }
             : { label: kindLabel.toLowerCase() },
           { label: entity.name },
         ]}
         createHref="/board/new"
       />
 
-      <div className="min-h-0 flex-1 overflow-y-auto px-5 pb-8 pt-3.5">
+      <div className="min-h-0 flex-1 overflow-y-auto px-3 pb-8 pt-3.5 sm:px-5">
         {/* ---- title row ---- */}
-        <div className="mb-4 flex items-center gap-4">
+        <div className="mb-4 flex items-center gap-3 sm:gap-4">
           <button
             aria-label="Back"
             onClick={() => router.back()}
@@ -146,7 +148,7 @@ export function EntitySheet({ entityId }: { entityId: string }) {
             value={entity.name}
             onChange={(e) => updateEntity(entity.id, { name: e.target.value })}
             aria-label="Entity name"
-            className="min-w-0 flex-1 bg-transparent font-display text-[27px] font-bold leading-none outline-none focus:text-accent-soft"
+            className="min-w-0 flex-1 bg-transparent font-display text-[21px] font-bold leading-none outline-none focus:text-accent-soft sm:text-[27px]"
           />
           <button
             aria-label="Entity settings"
@@ -157,7 +159,7 @@ export function EntitySheet({ entityId }: { entityId: string }) {
           </button>
         </div>
 
-        <div className="grid gap-6 lg:grid-cols-[minmax(0,1.55fr)_minmax(0,1fr)]">
+        <div className="grid gap-5 lg:grid-cols-[minmax(0,1.55fr)_minmax(0,1fr)] lg:gap-6">
           {/* ---------- left: gallery ---------- */}
           <div>
             <div className="relative overflow-hidden rounded-2xl border border-line bg-raise">
@@ -398,7 +400,7 @@ export function EntitySheet({ entityId }: { entityId: string }) {
                       key={r.id}
                       tone="muted"
                       onRemove={() => removeRelationship(r.id)}
-                      onClick={() => router.push(`/board/e/${other!.id}`)}
+                      onClick={() => router.push(routes.entity(other!.id))}
                     >
                       {outgoing ? `${r.kind} → ` : `← ${r.kind} `}
                       {other!.name}
@@ -603,7 +605,7 @@ function DetailModal({
           </div>
         )}
 
-        <div className="grid grid-cols-[1fr_140px] gap-3">
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-[1fr_140px]">
           <div>
             <Label>Field</Label>
             <Input

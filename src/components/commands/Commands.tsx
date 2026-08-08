@@ -3,8 +3,15 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Sparkles, X, ArrowUp, Check, RotateCcw, Loader2 } from "lucide-react";
 import { useStore, docToText, appearancesFor } from "@/lib/store";
-import { buildContext, type CommandAction, COMMAND_ACTIONS } from "@/lib/ai";
+import {
+  buildContext,
+  localResponse,
+  type CommandAction,
+  COMMAND_ACTIONS,
+} from "@/lib/ai";
 import { Button, cx } from "@/components/ui/primitives";
+
+const STATIC = process.env.NEXT_PUBLIC_STATIC_EXPORT === "1";
 
 type Result = {
   action: CommandAction;
@@ -71,12 +78,33 @@ export function Commands() {
     setBusy(true);
     setError(null);
     setResult(null);
+
+    const offline = () =>
+      setResult({
+        action,
+        prompt,
+        text: localResponse(action.id, prompt, context),
+        source: "local",
+      });
+
+    // The static build has no server to ask, so it goes straight to the
+    // offline analysis rather than showing the writer a failed request.
+    if (STATIC) {
+      offline();
+      setBusy(false);
+      return;
+    }
+
     try {
       const res = await fetch("/api/commands", {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({ action, prompt, context }),
       });
+      if (res.status === 404) {
+        offline();
+        return;
+      }
       const data = await res.json();
       if (!res.ok) throw new Error(data?.error ?? "Request failed");
       setResult({ action, prompt, text: data.text, source: data.source });
@@ -255,8 +283,9 @@ export function Commands() {
               </button>
             </div>
             <p className="mt-1.5 text-[10px] text-faint">
-              Your writing is only sent to a model when one is configured for
-              this deployment.
+              {STATIC
+                ? "This build has no server, so nothing you write leaves the browser."
+                : "Your writing is only sent to a model when one is configured for this deployment."}
             </p>
           </div>
         </div>

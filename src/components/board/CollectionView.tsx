@@ -2,14 +2,17 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { SlidersHorizontal, ImageOff } from "lucide-react";
 import { useStore } from "@/lib/store";
 import { useHydrated } from "@/lib/useHydrated";
 import { BoardBar } from "./BoardBar";
 import { cx, EmptyState, Button } from "@/components/ui/primitives";
+import { routes } from "@/lib/routes";
 
-export function CollectionView({ boardId }: { boardId: string }) {
+export function CollectionView() {
   const hydrated = useHydrated();
+  const boardId = useSearchParams().get("id") ?? "";
   const board = useStore((s) => s.boards.find((b) => b.id === boardId));
   const entities = useStore((s) => s.entities);
   const [dense, setDense] = useState(false);
@@ -48,12 +51,12 @@ export function CollectionView({ boardId }: { boardId: string }) {
           { label: "All", href: "/board" },
           { label: board.name.toLowerCase() },
         ]}
-        createHref={`/board/new?board=${board.id}`}
+        createHref={routes.newEntity(board.id)}
       />
 
-      <div className="min-h-0 flex-1 overflow-y-auto px-5 pb-8 pt-4">
+      <div className="min-h-0 flex-1 overflow-y-auto px-3 pb-8 pt-4 sm:px-5">
         <div className="mb-4 flex items-center justify-between">
-          <h1 className="font-display text-[27px] font-bold leading-none">
+          <h1 className="font-display text-[22px] font-bold leading-none sm:text-[27px]">
             {board.name}
           </h1>
           <button
@@ -71,7 +74,7 @@ export function CollectionView({ boardId }: { boardId: string }) {
 
         {members.length === 0 ? (
           <EmptyState caption="Nothing In Here Yet">
-            <Link href={`/board/new?board=${board.id}`}>
+            <Link href={routes.newEntity(board.id)}>
               <Button size="sm">Add the first one</Button>
             </Link>
           </EmptyState>
@@ -80,8 +83,8 @@ export function CollectionView({ boardId }: { boardId: string }) {
             className={cx(
               "grid gap-4",
               dense
-                ? "grid-cols-3 sm:grid-cols-4 lg:grid-cols-6"
-                : "grid-cols-2 sm:grid-cols-3",
+                ? "grid-cols-2 sm:grid-cols-4 lg:grid-cols-6"
+                : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3",
             )}
           >
             {members.map((e) => {
@@ -89,7 +92,7 @@ export function CollectionView({ boardId }: { boardId: string }) {
               return (
                 <Link
                   key={e.id}
-                  href={`/board/e/${e.id}`}
+                  href={routes.entity(e.id)}
                   className="group block overflow-hidden rounded-xl border border-line transition-all hover:border-accent/50"
                 >
                   <div className="relative aspect-[16/10] bg-raise">

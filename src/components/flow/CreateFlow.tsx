@@ -9,6 +9,7 @@ import { BoardBar } from "@/components/board/BoardBar";
 import { Button, cx, Input, Label, Select, Textarea } from "@/components/ui/primitives";
 import { TEMPLATES, templateById } from "@/lib/flowTemplates";
 import type { FlowDirection, FlowScope, FlowTemplateId } from "@/lib/types";
+import { routes } from "@/lib/routes";
 
 const QUICK: FlowTemplateId[] = ["story", "relationship", "timeline"];
 
@@ -44,7 +45,7 @@ export function CreateFlow() {
       nodes,
       edges,
     });
-    router.push(`/flow/${id}`);
+    router.push(routes.flowView(id));
   }
 
   if (!hydrated) return <div className="h-full" />;
@@ -58,7 +59,7 @@ export function CreateFlow() {
         trailing={<Maximize2 size={11} className="text-faint" />}
       />
 
-      <div className="min-h-0 flex-1 overflow-y-auto px-5 pb-10 pt-10">
+      <div className="min-h-0 flex-1 overflow-y-auto px-3 pb-10 pt-6 sm:px-5 sm:pt-10">
         <div className="mx-auto w-full max-w-[640px]">
           <label className="mb-1.5 block text-[14px] text-dim" htmlFor="flow-name">
             Flow name
@@ -85,7 +86,7 @@ export function CreateFlow() {
           <div
             role="radiogroup"
             aria-label="Starting point"
-            className="grid gap-6 sm:grid-cols-2"
+            className="grid gap-4 sm:grid-cols-2 sm:gap-6"
           >
             {/* ---- templates ---- */}
             <div

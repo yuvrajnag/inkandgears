@@ -35,6 +35,7 @@ import {
 } from "lucide-react";
 import { cx } from "@/components/ui/primitives";
 import { useStore } from "@/lib/store";
+import { useIsCompact } from "@/lib/useMedia";
 import type { Chapter, Scene } from "@/lib/types";
 
 const FONTS = [
@@ -86,6 +87,7 @@ export function Toolbar({
   const setActiveScene = useStore((s) => s.setActiveScene);
   const updateScene = useStore((s) => s.updateScene);
 
+  const compact = useIsCompact();
   const [statsOpen, setStatsOpen] = useState(true);
   const [, force] = useState(0);
 
@@ -106,54 +108,74 @@ export function Toolbar({
     .filter((s) => s.chapterId === chapter?.id)
     .sort((a, b) => a.order - b.order);
 
-  if (simpleMode) {
+  /*
+   * Below a laptop there is no honest way to fit six tool groups, and 19px
+   * hit targets are unusable with a thumb. Narrow screens get the same
+   * toolbar Simple Mode uses, with the scene picker kept alongside it.
+   */
+  if (simpleMode || compact) {
     return (
-      <div className="flex shrink-0 items-center gap-1 border-b border-line px-3 py-1.5">
+      <div className="flex shrink-0 items-center gap-1 overflow-x-auto border-b border-line px-3 py-2">
         <Tool
           label="Bold"
           active={editor?.isActive("bold")}
           onClick={() => editor?.chain().focus().toggleBold().run()}
         >
-          <Bold size={13} />
+          <Bold size={15} />
         </Tool>
         <Tool
           label="Italic"
           active={editor?.isActive("italic")}
           onClick={() => editor?.chain().focus().toggleItalic().run()}
         >
-          <Italic size={13} />
+          <Italic size={15} />
         </Tool>
         <Tool
           label="Underline"
           active={editor?.isActive("underline")}
           onClick={() => editor?.chain().focus().toggleUnderline().run()}
         >
-          <Underline size={13} />
+          <Underline size={15} />
         </Tool>
-        <Divider />
         <Tool
           label="Bullet list"
           active={editor?.isActive("bulletList")}
           onClick={() => editor?.chain().focus().toggleBulletList().run()}
         >
-          <List size={13} />
+          <List size={15} />
         </Tool>
         <Tool
           label="Quote"
           active={editor?.isActive("blockquote")}
           onClick={() => editor?.chain().focus().toggleBlockquote().run()}
         >
-          <Quote size={13} />
+          <Quote size={15} />
         </Tool>
 
-        <span className="ml-auto flex items-center gap-3 text-[11px] text-faint">
-          <span>{stats.words} words</span>
-          <button
-            onClick={() => setSimpleMode(false)}
-            className="rounded-md border border-line2 px-2 py-0.5 text-[11px] text-dim transition-colors hover:text-ink"
-          >
-            Advanced mode
-          </button>
+        <Divider />
+        <Tool label="Chapters and scenes" onClick={onOpenManage}>
+          <BookMarked size={15} />
+        </Tool>
+        <Tool label="Scene notes and metadata" onClick={onOpenMeta}>
+          <MessageSquarePlus size={15} />
+        </Tool>
+        <Tool label="Search the manuscript" onClick={onOpenSearch}>
+          <Search size={15} />
+        </Tool>
+        <Tool label="New scene" onClick={onNewScene}>
+          <FilePlus2 size={15} />
+        </Tool>
+
+        <span className="ml-auto flex shrink-0 items-center gap-2.5 pl-3 text-[11px] text-faint">
+          <span className="whitespace-nowrap">{stats.words} words</span>
+          {!compact && (
+            <button
+              onClick={() => setSimpleMode(false)}
+              className="whitespace-nowrap rounded-md border border-line2 px-2 py-1 text-[11px] text-dim transition-colors hover:text-ink"
+            >
+              Advanced mode
+            </button>
+          )}
         </span>
       </div>
     );
@@ -549,7 +571,8 @@ function Tool({
       title={label}
       onClick={onClick}
       className={cx(
-        "grid h-[19px] w-[19px] place-items-center rounded transition-colors",
+        "grid h-[19px] w-[19px] shrink-0 place-items-center rounded transition-colors",
+        "max-lg:h-8 max-lg:w-8",
         active ? "bg-accent/15 text-accent" : "text-dim hover:bg-raise2 hover:text-ink",
       )}
     >

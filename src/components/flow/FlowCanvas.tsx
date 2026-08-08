@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import {
   ReactFlow,
   ReactFlowProvider,
@@ -21,6 +22,7 @@ import "@xyflow/react/dist/style.css";
 import { Plus, Copy, Trash2, Search, Maximize2 } from "lucide-react";
 import { useStore } from "@/lib/store";
 import { useHydrated } from "@/lib/useHydrated";
+import { useIsCompact } from "@/lib/useMedia";
 import { BoardBar } from "@/components/board/BoardBar";
 import { Button, cx, EmptyState, Input } from "@/components/ui/primitives";
 import { nodeTypes } from "./nodes";
@@ -32,8 +34,9 @@ import type {
   StoredFlowNode,
 } from "@/lib/types";
 
-export function FlowCanvas({ flowId }: { flowId: string }) {
+export function FlowCanvas() {
   const hydrated = useHydrated();
+  const flowId = useSearchParams().get("id") ?? "";
   const flow = useStore((s) => s.flows.find((f) => f.id === flowId));
 
   if (!hydrated) return <div className="h-full" />;
@@ -69,6 +72,7 @@ type Snapshot = { nodes: Node[]; edges: Edge[] };
 
 function Canvas({ flow }: { flow: Flow }) {
   const saveFlowGraph = useStore((s) => s.saveFlowGraph);
+  const compact = useIsCompact();
 
   // Seeded once per flow — the provider is keyed by id, so switching flows
   // remounts rather than re-syncing.
@@ -269,7 +273,7 @@ function Canvas({ flow }: { flow: Flow }) {
       />
 
       {/* ---- canvas toolbar ---- */}
-      <div className="flex shrink-0 items-center gap-1.5 px-3 py-2">
+      <div className="flex shrink-0 flex-wrap items-center gap-1.5 px-2.5 py-2 sm:px-3">
         <Button size="sm" variant="outline" onClick={addNode}>
           <Plus size={12} /> Node
         </Button>
@@ -326,7 +330,7 @@ function Canvas({ flow }: { flow: Flow }) {
               <Search size={14} />
             </button>
           )}
-          <span className="text-[11px] text-faint">
+          <span className="hidden text-[11px] text-faint sm:inline">
             {nodes.length} nodes · {edges.length} edges
           </span>
         </div>
@@ -349,6 +353,9 @@ function Canvas({ flow }: { flow: Flow }) {
           onConnect={onConnect}
           proOptions={{ hideAttribution: true }}
           fitView
+          // On a narrow screen a wide graph would otherwise shrink to
+          // unreadable specks; stop zooming out and let the writer pan.
+          fitViewOptions={{ padding: 0.2, minZoom: 0.45 }}
           minZoom={0.15}
           maxZoom={2.5}
           selectionOnDrag
@@ -366,18 +373,20 @@ function Canvas({ flow }: { flow: Flow }) {
             showInteractive={false}
             className="!rounded-lg !border !border-line !bg-panel !shadow-xl"
           />
-          <MiniMap
-            pannable
-            zoomable
-            bgColor="#070707"
-            nodeColor="#232323"
-            nodeStrokeColor="#3a3a3a"
-            nodeBorderRadius={3}
-            maskColor="rgba(0,0,0,.66)"
-            maskStrokeColor="#2a2a2a"
-            // clear of the Commands launcher in the corner
-            style={{ right: 68, bottom: 12 }}
-          />
+          {!compact && (
+            <MiniMap
+              pannable
+              zoomable
+              bgColor="#070707"
+              nodeColor="#232323"
+              nodeStrokeColor="#3a3a3a"
+              nodeBorderRadius={3}
+              maskColor="rgba(0,0,0,.66)"
+              maskStrokeColor="#2a2a2a"
+              // clear of the Commands launcher in the corner
+              style={{ right: 68, bottom: 12 }}
+            />
+          )}
         </ReactFlow>
       </div>
     </div>

@@ -8,6 +8,7 @@ import { useHydrated } from "@/lib/useHydrated";
 import { BoardBar } from "./BoardBar";
 import { cx, EmptyState } from "@/components/ui/primitives";
 import { ENTITY_KINDS, type EntityKind } from "@/lib/types";
+import { routes } from "@/lib/routes";
 
 type SortKey = "recent" | "name" | "kind";
 
@@ -70,17 +71,17 @@ export function BoardHome() {
           <EmptyState />
         </div>
       ) : (
-        <div className="min-h-0 flex-1 overflow-y-auto px-5 pb-8 pt-5">
+        <div className="min-h-0 flex-1 overflow-y-auto px-3 pb-8 pt-4 sm:px-5 sm:pt-5">
           {/* ---- collections ---- */}
           {sortedBoards.length > 0 && (
-            <div className="mb-9 flex flex-wrap gap-9">
+            <div className="mb-7 flex flex-wrap gap-5 sm:mb-9 sm:gap-9">
               {sortedBoards.map((b) => {
                 const members = entities.filter((e) => e.boardId === b.id);
                 const pics = members.flatMap((e) => e.images);
                 return (
-                  <div key={b.id} className="w-[190px]">
+                  <div key={b.id} className="w-[calc(50%-0.625rem)] max-w-[190px] sm:w-[190px]">
                     <Link
-                      href={`/board/c/${b.id}`}
+                      href={routes.collection(b.id)}
                       className="block overflow-hidden rounded-xl border border-line transition-all hover:border-line2"
                     >
                       <Mosaic images={pics.map((p) => p.src)} />
@@ -127,7 +128,7 @@ export function BoardHome() {
                 {noArtwork.map((e) => (
                   <Link
                     key={e.id}
-                    href={`/board/e/${e.id}`}
+                    href={routes.entity(e.id)}
                     className="rounded-lg border border-line bg-raise/60 px-2.5 py-1.5 text-[12px] text-dim transition-colors hover:border-accent/50 hover:text-ink"
                   >
                     {e.name}
@@ -142,7 +143,7 @@ export function BoardHome() {
 
           {/* ---- saved pictures ---- */}
           <div className="mb-4 flex items-center justify-between">
-            <h2 className="font-display text-[27px] font-bold leading-none">
+            <h2 className="font-display text-[22px] font-bold leading-none sm:text-[27px]">
               Your saved pic&apos;s
             </h2>
             <div className="relative">
@@ -227,7 +228,7 @@ export function BoardHome() {
               {shots.map(({ img, entity }) => (
                 <Link
                   key={img.id}
-                  href={`/board/e/${entity.id}`}
+                  href={routes.entity(entity.id)}
                   className="group relative block overflow-hidden rounded-xl border border-line transition-all hover:border-accent/50"
                 >
                   {/* eslint-disable-next-line @next/next/no-img-element */}

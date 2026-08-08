@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { useStore } from "@/lib/store";
 import { cx } from "@/components/ui/primitives";
+import { useIsCompact } from "@/lib/useMedia";
 
 const STATUS_DOT: Record<string, string> = {
   idea: "#4a4a4a",
@@ -37,6 +38,7 @@ export function SceneTree({ onClose }: { onClose: () => void }) {
   const removeChapter = useStore((s) => s.removeChapter);
   const renameChapter = useStore((s) => s.renameChapter);
 
+  const compact = useIsCompact();
   const [collapsed, setCollapsed] = useState<Set<string>>(new Set());
   const toggle = (id: string) =>
     setCollapsed((prev) => {
@@ -46,8 +48,17 @@ export function SceneTree({ onClose }: { onClose: () => void }) {
       return next;
     });
 
-  return (
-    <aside className="flex w-[236px] shrink-0 flex-col border-r border-line bg-void">
+  const panel = (
+    <aside
+      className={cx(
+        "flex flex-col border-r border-line bg-void",
+        // On a laptop it's a column beside the page; on a phone it slides over
+        // it, because there isn't room for both.
+        compact
+          ? "fixed inset-y-0 left-0 z-40 w-[82vw] max-w-[300px] shadow-2xl"
+          : "w-[236px] shrink-0",
+      )}
+    >
       <div className="flex items-center justify-between border-b border-line px-3 py-2">
         <h2 className="text-[12px] font-medium">Manuscript</h2>
         <button
@@ -202,6 +213,19 @@ export function SceneTree({ onClose }: { onClose: () => void }) {
         <Plus size={11} /> Volume
       </button>
     </aside>
+  );
+
+  if (!compact) return panel;
+
+  return (
+    <>
+      <div
+        className="fixed inset-0 z-30 bg-black/60"
+        onClick={onClose}
+        aria-hidden
+      />
+      {panel}
+    </>
   );
 }
 

@@ -18,6 +18,7 @@ import {
 import { ENTITY_KINDS, type Detail, type EntityKind } from "@/lib/types";
 import { readImageFile } from "@/lib/upload";
 import type { EntityImage } from "@/lib/types";
+import { routes } from "@/lib/routes";
 
 export function CreateEntity() {
   const hydrated = useHydrated();
@@ -72,7 +73,7 @@ export function CreateEntity() {
       images,
       details: details.map((d, i) => ({ ...d, id: `d${i}${Date.now()}` })),
     });
-    router.push(`/board/e/${id}`);
+    router.push(routes.entity(id));
   }
 
   if (!hydrated) return <div className="h-full" />;
@@ -85,10 +86,10 @@ export function CreateEntity() {
         onCreate={save}
       />
 
-      <div className="min-h-0 flex-1 overflow-y-auto px-5 pb-8 pt-7">
-        <div className="mx-auto grid max-w-[880px] gap-10 md:grid-cols-2">
+      <div className="min-h-0 flex-1 overflow-y-auto px-3 pb-8 pt-5 sm:px-5 sm:pt-7"><div className="mx-auto max-w-[880px]">
+        <div className="grid gap-6 md:grid-cols-2 md:gap-10">
           {/* ---------- left: upload ---------- */}
-          <div>
+          <div className="order-2 md:order-1">
             <div
               onDragOver={(e) => {
                 e.preventDefault();
@@ -101,7 +102,7 @@ export function CreateEntity() {
                 ingest(e.dataTransfer.files);
               }}
               className={cx(
-                "grid aspect-square place-items-center rounded-2xl border bg-raise transition-colors",
+                "grid aspect-[4/3] max-h-[46vh] place-items-center rounded-2xl border bg-raise transition-colors sm:aspect-square sm:max-h-none",
                 dragging
                   ? "border-accent bg-accent/5"
                   : "border-transparent hover:border-line2",
@@ -175,7 +176,7 @@ export function CreateEntity() {
           </div>
 
           {/* ---------- right: fields ---------- */}
-          <div className="space-y-4">
+          <div className="order-1 space-y-4 md:order-2">
             <div>
               <Label>Name</Label>
               <Input
@@ -312,6 +313,7 @@ export function CreateEntity() {
                 )}
               </div>
             </div>
+          </div>
           </div>
         </div>
       </div>

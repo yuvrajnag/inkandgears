@@ -244,7 +244,7 @@ export function Modal({
             <X size={15} />
           </button>
         </div>
-        <div className="max-h-[70vh] overflow-y-auto p-5">{children}</div>
+        <div className="max-h-[70vh] overflow-y-auto p-4 sm:p-5">{children}</div>
       </div>
     </div>
   );
@@ -290,7 +290,7 @@ function Cactus() {
   return (
     <svg
       viewBox="0 0 280 180"
-      className="h-[170px] w-[264px] text-ink"
+      className="h-auto w-[min(264px,72vw)] text-ink"
       fill="none"
       stroke="currentColor"
       strokeWidth="2.4"

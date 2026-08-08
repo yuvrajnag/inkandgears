@@ -3,20 +3,13 @@
  * caps. Drawn as text inside an SVG so it scales, stays selectable-free, and
  * never needs a font file at runtime beyond the display face.
  */
-export function Wordmark({
-  className = "",
-  height = 34,
-}: {
-  className?: string;
-  height?: number;
-}) {
-  const w = (height / 34) * 118;
+export function Wordmark({ className = "" }: { className?: string }) {
   return (
     <svg
       viewBox="0 0 118 34"
-      width={w}
-      height={height}
-      className={className}
+      // Sized by CSS so the mark can shrink on a phone without the nav
+      // colliding with it.
+      className={`w-auto ${className}`}
       role="img"
       aria-label="INK &amp; GEARS"
     >

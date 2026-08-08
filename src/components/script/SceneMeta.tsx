@@ -12,6 +12,7 @@ import {
   Textarea,
 } from "@/components/ui/primitives";
 import type { Scene, SceneStatus } from "@/lib/types";
+import { routes } from "@/lib/routes";
 
 const STATUSES: SceneStatus[] = ["idea", "outline", "draft", "revised", "final"];
 
@@ -128,7 +129,7 @@ export function SceneMeta({
                   </p>
                   <div className="flex flex-wrap gap-1.5">
                     {list.map(({ entity, count }) => (
-                      <Link key={entity.id} href={`/board/e/${entity.id}`}>
+                      <Link key={entity.id} href={routes.entity(entity.id)}>
                         <Chip tone="muted">
                           {entity.name}
                           {count > 1 && (

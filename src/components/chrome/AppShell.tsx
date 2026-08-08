@@ -140,7 +140,7 @@ export function AppShell({ children }: { children: ReactNode }) {
               aria-label="INK &amp; GEARS — home"
               className="absolute left-1/2 top-1 -translate-x-1/2 text-ink transition-opacity hover:opacity-80"
             >
-              <Wordmark height={36} />
+              <Wordmark className="h-7 sm:h-9" />
             </Link>
 
             <button
@@ -152,7 +152,10 @@ export function AppShell({ children }: { children: ReactNode }) {
           </div>
 
           {/* ---- module tabs ---- */}
-          <nav className="mt-1 flex items-center gap-4" aria-label="Modules">
+          <nav
+            className="mt-2.5 flex items-center gap-4 sm:mt-1"
+            aria-label="Modules"
+          >
             {TABS.map((t) => {
               const active = isActive(t.href);
               return (

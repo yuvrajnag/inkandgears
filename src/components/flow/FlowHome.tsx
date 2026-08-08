@@ -7,6 +7,7 @@ import { useHydrated } from "@/lib/useHydrated";
 import { BoardBar } from "@/components/board/BoardBar";
 import { EmptyState } from "@/components/ui/primitives";
 import { FlowThumb } from "./FlowThumb";
+import { routes } from "@/lib/routes";
 
 export function FlowHome() {
   const hydrated = useHydrated();
@@ -28,12 +29,12 @@ export function FlowHome() {
           <EmptyState />
         </div>
       ) : (
-        <div className="min-h-0 flex-1 overflow-y-auto px-5 pb-8 pt-5">
+        <div className="min-h-0 flex-1 overflow-y-auto px-3 pb-8 pt-4 sm:px-5 sm:pt-5">
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {flows.map((f) => (
               <div key={f.id} className="group relative">
                 <Link
-                  href={`/flow/${f.id}`}
+                  href={routes.flowView(f.id)}
                   className="block overflow-hidden rounded-xl border border-line transition-all hover:border-accent/50"
                 >
                   <FlowThumb nodes={f.nodes} edges={f.edges} />

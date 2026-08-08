@@ -26,8 +26,8 @@ export function BoardBar({
 }) {
   const router = useRouter();
   return (
-    <div className="flex shrink-0 items-center gap-2.5 px-3 pt-3">
-      <div className="flex h-8 min-w-0 flex-1 items-center gap-1.5 rounded-lg border border-line2 bg-void px-3 text-[12.5px]">
+    <div className="flex shrink-0 items-center gap-2 px-2.5 pt-2.5 sm:gap-2.5 sm:px-3 sm:pt-3">
+      <div className="flex h-9 min-w-0 flex-1 items-center gap-1.5 overflow-hidden rounded-lg border border-line2 bg-void px-3 text-[12.5px] sm:h-8">
         {crumbs.map((c, i) => (
           <Fragment key={`${c.label}-${i}`}>
             {i > 0 && <span className="text-faint">/</span>}
@@ -55,7 +55,7 @@ export function BoardBar({
       </div>
       <Button
         size="sm"
-        className="h-8 w-[86px] rounded-lg"
+        className="h-9 w-[74px] shrink-0 rounded-lg sm:h-8 sm:w-[86px]"
         onClick={() => (onCreate ? onCreate() : createHref && router.push(createHref))}
       >
         {createLabel}

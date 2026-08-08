@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useStore, docToText } from "@/lib/store";
 import { Input, Modal, cx } from "@/components/ui/primitives";
 import { ENTITY_KINDS } from "@/lib/types";
+import { routes } from "@/lib/routes";
 
 type Hit =
   | { kind: "scene"; id: string; title: string; excerpt: string; where: string }
@@ -89,10 +90,10 @@ export function ManuscriptSearch({ onClose }: { onClose: () => void }) {
       setActiveScene(hit.id);
       onClose();
     } else if (hit.kind === "entity") {
-      router.push(`/board/e/${hit.id}`);
+      router.push(routes.entity(hit.id));
       onClose();
     } else {
-      router.push(`/flow/${hit.id}`);
+      router.push(routes.flowView(hit.id));
       onClose();
     }
   }

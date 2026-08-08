@@ -43,14 +43,14 @@ export function SlashMenu({
   const below = window.innerHeight - rect.bottom > 260;
   const top = below ? rect.bottom + 6 : undefined;
   const bottom = below ? undefined : window.innerHeight - rect.top + 6;
-  const left = Math.min(rect.left, window.innerWidth - 300);
+  const left = Math.max(8, Math.min(rect.left, window.innerWidth - 292));
 
   return createPortal(
     <div
       role="listbox"
       aria-label="Insert story entity"
       style={{ top, bottom, left }}
-      className="fixed z-50 w-[280px] overflow-hidden rounded-xl border border-line2 bg-panel shadow-2xl"
+      className="fixed z-50 w-[min(280px,calc(100vw-1rem))] overflow-hidden rounded-xl border border-line2 bg-panel shadow-2xl"
     >
       {items.length === 0 ? (
         <p className="px-3 py-3 text-[12px] text-faint">

@@ -15,6 +15,7 @@ import { useHydrated } from "@/lib/useHydrated";
 import { castPresence, findings, pulse } from "@/lib/pulse";
 import { cx } from "@/components/ui/primitives";
 import { TensionChart } from "./TensionChart";
+import { routes } from "@/lib/routes";
 
 export function Home() {
   const hydrated = useHydrated();
@@ -53,7 +54,7 @@ export function Home() {
   if (!hydrated) return <div className="h-full" />;
 
   return (
-    <div className="h-full overflow-y-auto px-6 pb-10 pt-6">
+    <div className="h-full overflow-y-auto px-4 pb-10 pt-5 sm:px-6 sm:pt-6">
       <div className="mx-auto max-w-[1080px]">
         {/* ---- header ---- */}
         <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
@@ -65,7 +66,7 @@ export function Home() {
               value={projectName}
               onChange={(e) => setProjectName(e.target.value)}
               aria-label="Project name"
-              className="w-full max-w-md bg-transparent font-display text-[34px] font-bold leading-none outline-none focus:text-accent-soft"
+              className="w-full max-w-md bg-transparent font-display text-[26px] font-bold leading-none outline-none focus:text-accent-soft sm:text-[34px]"
             />
           </div>
           <div className="flex gap-1 rounded-lg border border-line2 bg-raise p-1">
@@ -92,7 +93,7 @@ export function Home() {
         </div>
 
         {/* ---- module cards ---- */}
-        <div className="mb-8 grid gap-3 sm:grid-cols-3">
+        <div className="mb-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           <ModuleCard
             href="/script"
             icon={<PenLine size={16} />}
@@ -219,10 +220,10 @@ export function Home() {
                     {cast.slice(0, 8).map((c) => (
                       <li key={c.entity.id}>
                         <Link
-                          href={`/board/e/${c.entity.id}`}
+                          href={routes.entity(c.entity.id)}
                           className="flex items-center gap-3 rounded-lg border border-line bg-raise/50 px-3 py-2 transition-colors hover:border-accent/40"
                         >
-                          <span className="w-28 shrink-0 truncate text-[12px]">
+                          <span className="w-20 shrink-0 truncate text-[12px] sm:w-28">
                             {c.entity.name}
                           </span>
                           <span className="h-1.5 flex-1 overflow-hidden rounded-full bg-raise2">
