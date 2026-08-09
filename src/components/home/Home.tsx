@@ -6,6 +6,7 @@ import {
   PenLine,
   Boxes,
   Workflow,
+  Gamepad2,
   Activity,
   Clock,
   ArrowRight,
@@ -25,6 +26,7 @@ export function Home() {
   const chapters = useStore((s) => s.chapters);
   const entities = useStore((s) => s.entities);
   const flows = useStore((s) => s.flows);
+  const narrative = useStore((s) => s.narrative);
   const versions = useStore((s) => s.versions);
   const lastSavedAt = useStore((s) => s.lastSavedAt);
   const setActiveScene = useStore((s) => s.setActiveScene);
@@ -93,7 +95,7 @@ export function Home() {
         </div>
 
         {/* ---- module cards ---- */}
-        <div className="mb-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mb-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           <ModuleCard
             href="/script"
             icon={<PenLine size={21} />}
@@ -117,6 +119,14 @@ export function Home() {
             sub="Flow"
             stat={`${flows.length} flow${flows.length === 1 ? "" : "s"}`}
             detail={`${flows.reduce((n, f) => n + f.nodes.length, 0)} nodes planned`}
+          />
+          <ModuleCard
+            href={routes.game}
+            icon={<Gamepad2 size={21} />}
+            title="Narrative Studio"
+            sub="Game"
+            stat={`${narrative.quests.length} quest${narrative.quests.length === 1 ? "" : "s"}`}
+            detail={`${narrative.dialogues.reduce((n, d) => n + d.nodes.length, 0)} dialogue nodes · ${narrative.variables.length} variables`}
           />
         </div>
 

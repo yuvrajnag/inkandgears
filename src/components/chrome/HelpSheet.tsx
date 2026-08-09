@@ -34,6 +34,10 @@ export function HelpSheet({ onClose }: { onClose: () => void }) {
               <dd className="inline"> — Thread Map. Node-based planning for structure, timelines, and relationships.</dd>
             </div>
             <div>
+              <dt className="inline text-ink">Game</dt>
+              <dd className="inline"> — Game Narrative Studio. Quests, branching dialogue, state, and a runtime you can play.</dd>
+            </div>
+            <div>
               <dt className="inline text-ink">Home</dt>
               <dd className="inline"> — Cosmos. Project state, version history, and story analysis.</dd>
             </div>
@@ -77,6 +81,20 @@ export function HelpSheet({ onClose }: { onClose: () => void }) {
               </div>
             ))}
           </dl>
+        </section>
+
+        <section>
+          <h3 className="mb-2 font-display text-[20.8px] text-ink">
+            Playing a narrative
+          </h3>
+          <p className="text-dim">
+            Under <span className="text-ink">Game → Play</span> the flow runs for
+            real: conditions gate choices, effects change state, world events
+            fire on their own. The session is throwaway — playing can never
+            write back into your narrative. The debugger beside it runs
+            continuously and flags unreachable nodes, dead ends and broken
+            references while you edit.
+          </p>
         </section>
 
         <section>

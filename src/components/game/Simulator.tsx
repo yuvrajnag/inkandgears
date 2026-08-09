@@ -81,11 +81,11 @@ export function Simulator() {
           <label className="mb-1.5 block text-[14px] text-faint">
             Or start from a specific node
           </label>
-          <div className="flex gap-2">
+          <div className="flex flex-col gap-2 sm:flex-row">
             <select
               value={startAt}
               onChange={(e) => setStartAt(e.target.value)}
-              className="ig-field h-10 flex-1 rounded-[10px] border-2 border-line2 bg-black px-3 text-[14px] text-ink outline-none"
+              className="ig-field h-10 w-full min-w-0 flex-1 rounded-[10px] border-2 border-line2 bg-black px-3 text-[14px] text-ink outline-none"
             >
               <option value="">Choose a node…</option>
               {allNodes.map(({ d, n }) => (

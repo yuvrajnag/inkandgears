@@ -10,6 +10,7 @@ import {
   COMMAND_ACTIONS,
 } from "@/lib/ai";
 import { Button, cx } from "@/components/ui/primitives";
+import { validateNarrative } from "@/lib/game/validate";
 
 const STATIC = process.env.NEXT_PUBLIC_STATIC_EXPORT === "1";
 
@@ -40,6 +41,7 @@ export function Commands() {
   const chapters = useStore((s) => s.chapters);
   const entities = useStore((s) => s.entities);
   const flows = useStore((s) => s.flows);
+  const narrative = useStore((s) => s.narrative);
   const activeSceneId = useStore((s) => s.activeSceneId);
   const updateScene = useStore((s) => s.updateScene);
 
@@ -60,6 +62,11 @@ export function Commands() {
     if (open) inputRef.current?.focus();
   }, [open]);
 
+  const report = useMemo(
+    () => validateNarrative(narrative, entities),
+    [narrative, entities],
+  );
+
   const context = useMemo(
     () =>
       buildContext({
@@ -69,8 +76,10 @@ export function Commands() {
         entities,
         flows,
         appearancesFor,
+        narrative,
+        report,
       }),
-    [scene, chapters, scenes, entities, flows],
+    [scene, chapters, scenes, entities, flows, narrative, report],
   );
 
   async function run() {
@@ -172,6 +181,8 @@ export function Commands() {
                   ` · ${context.entities.length} linked ${
                     context.entities.length === 1 ? "entity" : "entities"
                   }`}
+                {context.game && context.game.quests.length > 0 &&
+                  ` · ${context.game.quests.length} quests, ${context.game.variables.length} variables`}
               </span>
             </p>
 

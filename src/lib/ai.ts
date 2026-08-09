@@ -1,10 +1,12 @@
 import { docToText } from "./store";
 import type { Chapter, Entity, Flow, Scene } from "./types";
+import { describeCondition, describeEffect } from "./game/logic";
+import type { GameNarrative, ValidationReport } from "./game/types";
 
 export type CommandAction = {
   id: string;
   label: string;
-  group: "write" | "develop" | "analyse" | "world";
+  group: "write" | "develop" | "analyse" | "world" | "game";
   hint: string;
 };
 
@@ -63,6 +65,24 @@ export const COMMAND_ACTIONS: CommandAction[] = [
     group: "world",
     hint: "Grows detail for the entities this scene already references.",
   },
+  {
+    id: "quest-ideas",
+    label: "Quest ideas",
+    group: "game",
+    hint: "Proposes quests that use the characters, places and variables you already have.",
+  },
+  {
+    id: "branch-check",
+    label: "Branch check",
+    group: "game",
+    hint: "Reads the dialogue graph for thin branching, unused state and choices that don't matter.",
+  },
+  {
+    id: "consequences",
+    label: "Consequences",
+    group: "game",
+    hint: "Suggests effects for choices that currently change nothing.",
+  },
 ];
 
 export type AiContext = {
@@ -80,6 +100,21 @@ export type AiContext = {
   }[];
   flows: { name: string; beats: string[] }[];
   stats: { words: number; scenes: number; chapters: number };
+  /** Phase 2 — present only when the game narrative has content. */
+  game?: {
+    quests: { id: string; name: string; objectives: string[]; state: string }[];
+    variables: { name: string; type: string; initial: string }[];
+    dialogue: {
+      id: string;
+      name: string;
+      nodes: number;
+      endings: string[];
+      /** Choices that carry no effects — the flat spots. */
+      inertChoices: string[];
+    }[];
+    events: { name: string; when: string; then: string[] }[];
+    issues: string[];
+  };
 };
 
 /**
@@ -96,8 +131,10 @@ export function buildContext(input: {
   entities: Entity[];
   flows: Flow[];
   appearancesFor: (entityId: string, scenes: Scene[]) => Scene[];
+  narrative?: GameNarrative;
+  report?: ValidationReport;
 }): AiContext {
-  const { scene, chapters, scenes, entities, flows } = input;
+  const { scene, chapters, scenes, entities, flows, narrative, report } = input;
   const chapter = chapters.find((c) => c.id === scene?.chapterId);
   const text = scene ? docToText(scene.doc).trim() : "";
 
@@ -128,6 +165,47 @@ export function buildContext(input: {
       scenes: scenes.length,
       chapters: chapters.length,
     },
+    game: narrative ? summariseNarrative(narrative, report) : undefined,
+  };
+}
+
+/**
+ * A compact view of the game narrative. Deliberately structural rather than
+ * verbatim — the assistant needs the shape of the branching and the state, not
+ * every line of dialogue.
+ */
+function summariseNarrative(n: GameNarrative, report?: ValidationReport) {
+  return {
+    quests: n.quests.slice(0, 20).map((q) => ({
+      id: q.id,
+      name: q.name,
+      objectives: q.objectives.map((o) => o.description),
+      state: q.initialState,
+    })),
+    variables: n.variables.slice(0, 40).map((v) => ({
+      name: v.name,
+      type: v.type,
+      initial: String(v.initial),
+    })),
+    dialogue: n.dialogues.slice(0, 10).map((d) => ({
+      id: d.id,
+      name: d.name,
+      nodes: d.nodes.length,
+      endings: d.nodes
+        .filter((x) => x.isEnding)
+        .map((x) => x.endingLabel ?? x.id),
+      inertChoices: d.nodes
+        .flatMap((x) => x.choices)
+        .filter((c) => c.effects.length === 0)
+        .map((c) => c.text)
+        .slice(0, 12),
+    })),
+    events: n.events.slice(0, 12).map((e) => ({
+      name: e.name,
+      when: e.conditions.map((c) => describeCondition(c)).join(" AND "),
+      then: e.effects.map((x) => describeEffect(x)),
+    })),
+    issues: (report?.issues ?? []).slice(0, 12).map((i) => i.message),
   };
 }
 
@@ -169,6 +247,49 @@ export function userPrompt(action: string, prompt: string, ctx: AiContext) {
       "Planned structure:\n" +
         ctx.flows.map((f) => `- ${f.name}: ${f.beats.join(" → ")}`).join("\n"),
     );
+  }
+  if (ctx.game) {
+    const g = ctx.game;
+    if (g.quests.length) {
+      parts.push(
+        "Quests:\n" +
+          g.quests
+            .map(
+              (q) =>
+                `- ${q.id} ${q.name} [${q.state}]${q.objectives.length ? `: ${q.objectives.join("; ")}` : ""}`,
+            )
+            .join("\n"),
+      );
+    }
+    if (g.variables.length) {
+      parts.push(
+        "Narrative state:\n" +
+          g.variables.map((v) => `- ${v.name} (${v.type}) = ${v.initial}`).join("\n"),
+      );
+    }
+    if (g.dialogue.length) {
+      parts.push(
+        "Conversations:\n" +
+          g.dialogue
+            .map(
+              (d) =>
+                `- ${d.name}: ${d.nodes} nodes, endings [${d.endings.join(", ") || "none"}]` +
+                (d.inertChoices.length
+                  ? `; choices with no effect: ${d.inertChoices.join(" | ")}`
+                  : ""),
+            )
+            .join("\n"),
+      );
+    }
+    if (g.events.length) {
+      parts.push(
+        "World events:\n" +
+          g.events.map((e) => `- ${e.name}: WHEN ${e.when} THEN ${e.then.join(", ")}`).join("\n"),
+      );
+    }
+    if (g.issues.length) {
+      parts.push("Debugger is currently reporting:\n" + g.issues.map((i) => `- ${i}`).join("\n"));
+    }
   }
   if (ctx.text) parts.push(`Scene text:\n"""\n${ctx.text}\n"""`);
   return parts.join("\n\n");
@@ -283,6 +404,70 @@ export function localResponse(
               )
               .join("\n\n")
           : "Link entities into this scene first, then this can build on them.");
+
+    case "branch-check": {
+      const g = ctx.game;
+      if (!g) return head("Branch check") + "No game narrative in this project yet.";
+      const inert = g.dialogue.flatMap((d) => d.inertChoices);
+      const endings = g.dialogue.flatMap((d) => d.endings);
+      return head("Branch check") +
+        [
+          `${g.dialogue.reduce((n, d) => n + d.nodes, 0)} nodes across ${g.dialogue.length} conversation${g.dialogue.length === 1 ? "" : "s"}, ${endings.length} ending${endings.length === 1 ? "" : "s"}.`,
+          endings.length <= 1
+            ? "Only one ending. If the player's choices all funnel to the same place, they will feel it."
+            : `Endings: ${endings.join(", ")}.`,
+          inert.length
+            ? `${inert.length} choice${inert.length === 1 ? "" : "s"} change no state at all — these read as flavour, not decisions: ${inert.slice(0, 5).map((c) => `"${c}"`).join(", ")}${inert.length > 5 ? "…" : ""}.`
+            : "Every choice carries at least one effect.",
+          g.issues.length
+            ? `The debugger is also flagging: ${g.issues.slice(0, 3).join(" / ")}`
+            : "The debugger is clean.",
+        ]
+          .filter(Boolean)
+          .join("\n\n");
+    }
+
+    case "consequences": {
+      const g = ctx.game;
+      if (!g) return head("Consequences") + "No game narrative in this project yet.";
+      const inert = g.dialogue.flatMap((d) => d.inertChoices);
+      if (!inert.length) {
+        return head("Consequences") + "Every choice already changes something. Next question is whether the changes are ones the player can notice.";
+      }
+      return head("Consequences for choices that currently do nothing") +
+        inert
+          .slice(0, 6)
+          .map(
+            (c) =>
+              `"${c}" — pick one: move a relationship, move ${g.variables.find((v) => v.type === "integer")?.name ?? "a counter"}, set a flag a later scene reads, or transition a quest. A choice the state never records is a choice the player never made.`,
+          )
+          .join("\n\n");
+    }
+
+    case "quest-ideas": {
+      const g = ctx.game;
+      // Only people can want things — a location makes nonsense of this line.
+      const names = ctx.entities
+        .filter((e) => e.kind === "character")
+        .map((e) => e.name);
+      const vars = g?.variables.map((v) => v.name) ?? [];
+      return head("Quest directions") +
+        [
+          vars.length
+            ? `Build on state you already track — ${vars.slice(0, 4).join(", ")}. A quest that reads existing variables costs nothing to wire up and makes earlier choices matter.`
+            : "Define a variable or two first; quests without state are just errands.",
+          names.length
+            ? `${names[0]} wants something they can't ask for directly. The quest is finding out what.`
+            : "Give the quest giver a motive they'd rather not state.",
+          "A quest that can be failed in an interesting way is worth two that can't.",
+          "One objective the player can complete without noticing it was optional — reward attention rather than compliance.",
+          g?.quests.length
+            ? `Existing quests: ${g.quests.map((q) => q.name).join(", ")}. Consider one that makes an earlier reward turn into a liability.`
+            : "",
+        ]
+          .filter(Boolean)
+          .join("\n\n");
+    }
 
     case "condense":
       return head("Tightening pass") +
